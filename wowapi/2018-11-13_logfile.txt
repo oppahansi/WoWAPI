@@ -1,0 +1,5 @@
+2018-11-13 23:47:42.7810 INFO Returned npc details with name: Brain Wash Totem
+2018-11-13 23:48:03.0022 INFO Returned npc details with name: Brain Wash Totem
+2018-11-13 23:54:29.7795 INFO Returned npc details with name: Brain Wash Totem
+2018-11-13 23:55:00.9558 ERROR Npc details with entry: 13, hasn't been found in db.
+2018-11-13 23:55:34.4456 ERROR Npc details with entry: 13, hasn't been found in db.

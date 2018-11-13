@@ -10,9 +10,11 @@ namespace Contracts.Classic
     {
         Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatessAsync();
         Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatesByTypeAsync(byte creatureType);
-        Task<IEnumerable<NpcsSearchResultListItem>> GetNpcsSearchResultList();
-        Task<IEnumerable<NpcsSearchResultListItem>> GetNpcsByTypeSearchResultList(byte creatureType);
+        Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList();
+        Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultList(byte creatureType);
         Task<CCreatureTemplate> GetCreatureTemplateByEntryAsync(uint entry);
         Task<CCreatureTemplate> GetCreatureTemplateByNameAsync(string name);
+        Task<NpcDetails> GetNpcDetailsByEntry(uint entry);
+        Task<NpcDetails> GetNpcDetailsByName(string name); 
     }
 }

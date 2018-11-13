@@ -5,7 +5,7 @@ using Entities.Models.Classic;
 
 namespace Entities.ModelsPrepared
 {
-    public class NpcsSearchResultListItem
+    public class NpcDetailsBase
     {
         public uint Entry { get; }
         public string Name { get; }
@@ -14,10 +14,10 @@ namespace Entities.ModelsPrepared
         public byte MaxLevel { get; }
         public string CreatureType { get; }
         public string Rank { get; }
-        public ushort FactionAlliance { get; }
-        public ushort FactionHorde { get; }
+        public string ReactAlliance { get; }
+        public string ReactHorde { get; }
 
-        public NpcsSearchResultListItem(CCreatureTemplate creatureTemplate)
+        public NpcDetailsBase(CCreatureTemplate creatureTemplate)
         {
             Entry = creatureTemplate.Entry;
             Name = creatureTemplate.Name;
@@ -26,8 +26,8 @@ namespace Entities.ModelsPrepared
             MaxLevel = creatureTemplate.MaxLevel;
             CreatureType = CreatureDictionary.CreatureTypes.ContainsKey(creatureTemplate.CreatureType) ? CreatureDictionary.CreatureTypes[creatureTemplate.CreatureType] : "Type Unspecified";
             Rank = CreatureDictionary.Ranks.ContainsKey(creatureTemplate.Rank) ? CreatureDictionary.Ranks[creatureTemplate.Rank] : "Rank Unspecified";
-            FactionAlliance = creatureTemplate.FactionAlliance;
-            FactionHorde = creatureTemplate.FactionHorde;
+            //FactionAlliance = creatureTemplate.FactionAlliance;
+            //FactionHorde = creatureTemplate.FactionHorde;
         }
     }
 }

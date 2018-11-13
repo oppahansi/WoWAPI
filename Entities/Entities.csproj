@@ -15,6 +15,10 @@
   <Folder Include="Models\Wotlk\" />
   <Folder Include="Models\Common\" />
   <Folder Include="Extensions\" />
+  <Folder Include="Enumerations\" />
 </ItemGroup>
 
+<ItemGroup>
+  <ProjectReference Include="..\Utilities\Utilities.csproj" />
+</ItemGroup>
 </Project>

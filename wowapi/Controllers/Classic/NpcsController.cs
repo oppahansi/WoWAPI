@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace wowapi.Controllers.Classic
 {
-    [Route("api/c/npcs")]
-    public class CreatureTemplateController : Controller
+    [Route("api/c/[controller]")]
+    public class NpcsController : Controller
     {
         private ILoggerManager _logger;
         private IRepositoryWrapper _repository;
 
-        public CreatureTemplateController(ILoggerManager logger, IRepositoryWrapper repository)
+        public NpcsController(ILoggerManager logger, IRepositoryWrapper repository)
         {
             _logger = logger;
             _repository = repository;
