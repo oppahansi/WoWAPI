@@ -23,7 +23,7 @@ namespace Repository.Classic
 
         public async Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatesByTypeAsync(byte creatureType)
         {
-            var creatureTemplates = await FindByConditionAync(x => x.CreatureType == creatureType);
+            var creatureTemplates = await FindByConditionAsync(x => x.CreatureType == creatureType);
             return creatureTemplates.OrderBy(x => x.Name);
         }
 
@@ -51,26 +51,26 @@ namespace Repository.Classic
 
         public async Task<CCreatureTemplate> GetCreatureTemplateByEntryAsync(uint entry)
         {
-            var creatureTemplate = await FindByConditionAync(x => x.Entry == entry);
+            var creatureTemplate = await FindByConditionAsync(x => x.Entry == entry);
             return creatureTemplate.DefaultIfEmpty(new CCreatureTemplate()).FirstOrDefault();
         }
 
         public async Task<CCreatureTemplate> GetCreatureTemplateByNameAsync(string name)
         {
-            var creatureTemplate = await FindByConditionAync(x => string.Compare(x.Name.ToLower(), name.ToLower(), System.StringComparison.Ordinal) == 0);
+            var creatureTemplate = await FindByConditionAsync(x => string.Compare(x.Name.ToLower(), name.ToLower(), System.StringComparison.Ordinal) == 0);
             return creatureTemplate.DefaultIfEmpty(new CCreatureTemplate()).FirstOrDefault();
         }
 
-        public async Task<NpcDetails> GetNpcDetailsByEntry(uint entry)
+        public async Task<NpcDetails> GetNpcDetailsByEntryAsync(uint entry)
         {
             var creatureTemplate = await GetCreatureTemplateByEntryAsync(entry);
-            return new NpcDetails(creatureTemplate);
+            return await Task.FromResult(new NpcDetails(creatureTemplate));
         }
 
-        public async Task<NpcDetails> GetNpcDetailsByName(string name)
+        public async Task<NpcDetails> GetNpcDetailsByNameAsync(string name)
         {
             var creatureTemplate = await GetCreatureTemplateByNameAsync(name);
-            return new NpcDetails(creatureTemplate);
+            return await Task.FromResult(new NpcDetails(creatureTemplate));
         }
     }
 }

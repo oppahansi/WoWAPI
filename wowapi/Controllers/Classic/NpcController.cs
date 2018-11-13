@@ -24,7 +24,7 @@ namespace wowapi.Controllers.Classic
         {
             try
             {
-                var npcDetails = await _repository.CreatureTemplateRepository.GetNpcDetailsByEntry(entry);
+                var npcDetails = await _repository.CreatureTemplateRepository.GetNpcDetailsByEntryAsync(entry);
 
                 if (npcDetails.IsEmptyObject())
                 {
@@ -49,7 +49,7 @@ namespace wowapi.Controllers.Classic
         {
             try
             {
-                var npcDetails = await _repository.CreatureTemplateRepository.GetNpcDetailsByName(name);
+                var npcDetails = await _repository.CreatureTemplateRepository.GetNpcDetailsByNameAsync(name);
 
                 if (npcDetails.IsEmptyObject())
                 {

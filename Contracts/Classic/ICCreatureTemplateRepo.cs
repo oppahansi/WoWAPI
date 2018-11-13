@@ -14,7 +14,7 @@ namespace Contracts.Classic
         Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultList(byte creatureType);
         Task<CCreatureTemplate> GetCreatureTemplateByEntryAsync(uint entry);
         Task<CCreatureTemplate> GetCreatureTemplateByNameAsync(string name);
-        Task<NpcDetails> GetNpcDetailsByEntry(uint entry);
-        Task<NpcDetails> GetNpcDetailsByName(string name); 
+        Task<NpcDetails> GetNpcDetailsByEntryAsync(uint entry);
+        Task<NpcDetails> GetNpcDetailsByNameAsync(string name); 
     }
 }
