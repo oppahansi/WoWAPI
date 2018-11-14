@@ -19,7 +19,6 @@
     <ProjectReference Include="..\Logging\Logging.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
-    <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
   
 </Project>

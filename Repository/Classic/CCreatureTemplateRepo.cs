@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Contracts;
 using Contracts.Classic;
 using Entities;
 using Entities.Models.Classic;
@@ -76,26 +75,16 @@ namespace Repository.Classic
         {
             var spawns = _repositoryContext.Creatures.Where(x => x.Id == entry).ToList();
             var creatureTemplate = await GetCreatureTemplateByEntryAsync(entry);
-            var npcDetails = new NpcDetails(creatureTemplate)
-            {
-                ExtraFlags = CreatureUtils.BreakDownExtraFlags(creatureTemplate.ExtraFlags),
-                MapSpawns = CommonUtils.GetMapSpawns(spawns)
-            };
 
-            return await Task.FromResult(npcDetails);
+            return await Task.FromResult(new NpcDetails(creatureTemplate, spawns));
         }
 
         public async Task<NpcDetails> GetNpcDetailsByNameAsync(string name)
         {
             var creatureTemplate = await GetCreatureTemplateByNameAsync(name);
             var spawns = _repositoryContext.Creatures.Where(x => x.Id == creatureTemplate.Entry).ToList();
-            var npcDetails = new NpcDetails(creatureTemplate)
-            {
-                ExtraFlags = CreatureUtils.BreakDownExtraFlags(creatureTemplate.ExtraFlags),
-                MapSpawns = CommonUtils.GetMapSpawns(spawns)
-            };
 
-            return await Task.FromResult(npcDetails);
+            return await Task.FromResult(new NpcDetails(creatureTemplate, spawns));
         }
 
         #endregion

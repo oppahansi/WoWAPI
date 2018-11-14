@@ -15,7 +15,4 @@
   <ItemGroup>
     <Compile Remove="Resources\CCreatureTemplateRepo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Contracts\Contracts.csproj" />
-  </ItemGroup>
 </Project>

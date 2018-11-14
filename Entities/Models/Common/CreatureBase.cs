@@ -12,8 +12,11 @@ namespace Entities.Models.Common
         public uint Id { get; set; }
         public ushort Map { get; set; }
         public uint Modelid { get; set; }
+        [Column("position_x")]
         public float PositionX { get; set; }
+        [Column("position_y")]
         public float PositionY { get; set; }
+        [Column("position_z")]
         public float PositionZ { get; set; }
         public float Orientation { get; set; }
         public float Spawndist { get; set; }
