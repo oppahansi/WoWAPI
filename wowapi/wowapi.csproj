@@ -26,7 +26,7 @@
     <Folder Include="Entities\Extensions\" />
     <Folder Include="Entities\ModelsPrepared\" />
     <Folder Include="Entities\Resources\" />
-    <Folder Include="Entities\Utilities\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="2018-11-14_logfile.txt" />

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Utilities
+namespace wowapi.Utilities
 {
     public static class EnumUtil
     {

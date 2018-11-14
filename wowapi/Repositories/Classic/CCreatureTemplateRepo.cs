@@ -72,18 +72,14 @@ namespace wowapi.Repository.Classic
 
         public async Task<NpcDetails> GetNpcDetailsByEntryAsync(uint entry)
         {
-            var spawns = _repositoryContext.Creatures.Where(x => x.Id == entry).ToList();
             var creatureTemplate = await GetCreatureTemplateByEntryAsync(entry);
-
-            return await Task.FromResult(new NpcDetails(creatureTemplate, spawns));
+            return await Task.FromResult(new NpcDetails(creatureTemplate));
         }
 
         public async Task<NpcDetails> GetNpcDetailsByNameAsync(string name)
         {
             var creatureTemplate = await GetCreatureTemplateByNameAsync(name);
-            var spawns = _repositoryContext.Creatures.Where(x => x.Id == creatureTemplate.Entry).ToList();
-
-            return await Task.FromResult(new NpcDetails(creatureTemplate, spawns));
+            return await Task.FromResult(new NpcDetails(creatureTemplate));
         }
 
         #endregion

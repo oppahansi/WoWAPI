@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using wowapi.Entities.Models.Classic;
-using Utilities;
+using wowapi.Utilities;
 
 namespace wowapi.Entities.ModelsPrepared
 {
@@ -9,16 +9,18 @@ namespace wowapi.Entities.ModelsPrepared
         public string Ainame { get; }
         public string ScriptName { get; }
         public IEnumerable<string> NpcFlags { get; }
-        public IEnumerable<string> ExtraFlags { get; set; }
-        public IEnumerable<string> Immunities { get; set; }
+        public IEnumerable<string> ExtraFlags { get; }
+        public IEnumerable<string> Immunities { get; }
         public IEnumerable<string> Resistances { get; }
 
-        public NpcDetails(CCreatureTemplate creatureTemplate, IEnumerable<CCreature> spawns) : base(creatureTemplate)
+        public NpcDetails(CCreatureTemplate creatureTemplate) : base(creatureTemplate)
         {
             Ainame = creatureTemplate.Ainame;
             ScriptName = creatureTemplate.ScriptName;
             ExtraFlags = CreatureUtils.BreakDownExtraFlags(creatureTemplate.ExtraFlags);
-            MapSpawns = CommonUtils.GetMapSpawns(spawns);
+            NpcFlags = CreatureUtils.BreakDownNpcFlags(creatureTemplate.NpcFlags);
+            Immunities = CreatureUtils.BreakDownNpcImmunities(creatureTemplate.MechanicImmuneMask);
+            Resistances = CreatureUtils.GetResistances(creatureTemplate);
         }
     }
 }

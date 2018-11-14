@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Utilities
+namespace wowapi.Utilities
 {
     public static class CommonUtils
     {
