@@ -28,7 +28,4 @@
     <Folder Include="Entities\Resources\" />
     <Folder Include="Utilities\" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="2018-11-14_logfile.txt" />
-  </ItemGroup>
 </Project>
