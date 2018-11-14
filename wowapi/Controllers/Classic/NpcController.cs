@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Contracts;
-using Entities.Extensions;
+using wowapi.Entities.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using wowapi.Contracts;
 
 namespace wowapi.Controllers.Classic
 {
@@ -30,11 +30,9 @@ namespace wowapi.Controllers.Classic
                     _logger.LogError($"Npc details with entry: {entry}, hasn't been found in db.");
                     return NotFound();
                 }
-                else
-                {
-                    _logger.LogInfo($"Returned npc details with entry: {entry}");
-                    return Ok(npcDetails);
-                }
+
+                _logger.LogInfo($"Returned npc details with entry: {entry}");
+                return Ok(npcDetails);
             }
             catch (Exception ex)
             {
@@ -55,11 +53,9 @@ namespace wowapi.Controllers.Classic
                     _logger.LogError($"Npc details with name: {name}, hasn't been found in db.");
                     return NotFound();
                 }
-                else
-                {
-                    _logger.LogInfo($"Returned npc details with name: {name}");
-                    return Ok(npcDetails);
-                }
+
+                _logger.LogInfo($"Returned npc details with name: {name}");
+                return Ok(npcDetails);
             }
             catch (Exception ex)
             {

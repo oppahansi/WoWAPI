@@ -1,13 +1,11 @@
-﻿using System;
-using Contracts;
-using Entities;
+﻿using wowapi.Entities;
 using Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Repository;
-using Repository.Classic;
+using wowapi.Contracts;
+using wowapi.Repository.Classic;
 
 namespace wowapi.Extensions
 {
