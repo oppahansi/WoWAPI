@@ -1,5 +1,4 @@
-﻿
-
+﻿using System.Collections.Generic;
 using Entities.Dictionaries;
 using Entities.Models.Classic;
 
@@ -16,6 +15,7 @@ namespace Entities.ModelsPrepared
         public string Rank { get; }
         public string ReactAlliance { get; }
         public string ReactHorde { get; }
+        public Dictionary<string, int> MapSpawns { get; set; }
 
         public NpcDetailsBase(CCreatureTemplate creatureTemplate)
         {

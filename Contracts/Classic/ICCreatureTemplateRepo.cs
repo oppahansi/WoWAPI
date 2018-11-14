@@ -8,13 +8,23 @@ namespace Contracts.Classic
 {
     public interface ICCreatureTemplateRepo
     {
+        #region Creature Templates - Raw Db
+
         Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatessAsync();
         Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatesByTypeAsync(byte creatureType);
-        Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList();
-        Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultList(byte creatureType);
         Task<CCreatureTemplate> GetCreatureTemplateByEntryAsync(uint entry);
         Task<CCreatureTemplate> GetCreatureTemplateByNameAsync(string name);
+
+
+        #endregion
+
+        #region Npcs - Prepared Creature Templates
+
+        Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList();
+        Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType);
         Task<NpcDetails> GetNpcDetailsByEntryAsync(uint entry);
-        Task<NpcDetails> GetNpcDetailsByNameAsync(string name); 
+        Task<NpcDetails> GetNpcDetailsByNameAsync(string name);
+
+        #endregion
     }
 }

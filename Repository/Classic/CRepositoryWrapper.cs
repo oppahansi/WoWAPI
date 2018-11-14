@@ -8,49 +8,35 @@ namespace Repository.Classic
     public class CRepositoryWrapper : IRepositoryWrapper
     {
         private CRepositoryContext _repoContext;
-        //private IOwnerRepository _owner;
 
-        private ICCreatureTemplateRepo _creatureTemplatesClassic;
-
-        public ICCreatureTemplateRepo CreatureTemplateRepository
+        private ICCreatureTemplateRepo _creatureTemplatesRepo;
+        public ICCreatureTemplateRepo CreatureTemplatesRepo
         {
             get
             {
-                if (_creatureTemplatesClassic == null)
+                if (_creatureTemplatesRepo == null)
                 {
-                    _creatureTemplatesClassic = new CCreatureTemplateRepo(_repoContext);
+                    _creatureTemplatesRepo = new CCreatureTemplateRepo(_repoContext);
                 }
 
-                return _creatureTemplatesClassic;
+                return _creatureTemplatesRepo;
             }
         }
 
-        /*
-        public IOwnerRepository Owner
+        private ICCreatuteRepo _creaturesRepo;
+        public ICCreatuteRepo CreaturesRepo
         {
             get
             {
-                if (_owner == null)
+                if (_creaturesRepo == null)
                 {
-                    _owner = new OwnerRepository(_repoContext);
+                    _creaturesRepo = new CCreatureRepo(_repoContext);
                 }
 
-                return _owner;
+                return _creaturesRepo;
             }
         }
 
-        public IAccountRepository Account
-        {
-            get
-            {
-                if (_account == null)
-                {
-                    _account = new AccountRepository(_repoContext);
-                }
-
-                return _account;
-            }
-        }*/
 
         public CRepositoryWrapper(CRepositoryContext repositoryContext)
         {

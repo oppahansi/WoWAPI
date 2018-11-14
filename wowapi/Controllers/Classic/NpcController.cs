@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Contracts;
 using Entities.Extensions;
@@ -24,7 +23,7 @@ namespace wowapi.Controllers.Classic
         {
             try
             {
-                var npcDetails = await _repository.CreatureTemplateRepository.GetNpcDetailsByEntryAsync(entry);
+                var npcDetails = await _repository.CreatureTemplatesRepo.GetNpcDetailsByEntryAsync(entry);
 
                 if (npcDetails.IsEmptyObject())
                 {
@@ -49,7 +48,7 @@ namespace wowapi.Controllers.Classic
         {
             try
             {
-                var npcDetails = await _repository.CreatureTemplateRepository.GetNpcDetailsByNameAsync(name);
+                var npcDetails = await _repository.CreatureTemplatesRepo.GetNpcDetailsByNameAsync(name);
 
                 if (npcDetails.IsEmptyObject())
                 {

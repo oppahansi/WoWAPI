@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Entities.Dictionaries;
 using Entities.Enumerations;
 
@@ -16,11 +14,11 @@ namespace Utilities
             foreach (var extraFlag in extraFlagEnumValues)
             {
                 if ((extraFlags & (uint)extraFlag) == (uint)extraFlag)
-
-                extraFlagsList.Add(CreatureDictionary.ExtraFlags[(uint)extraFlag]);
+                    extraFlagsList.Add(CreatureDictionary.ExtraFlags[(uint)extraFlag]);
             }
 
             return extraFlagsList;
         }
+
     }
 }

@@ -1,19 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Contracts;
 using Contracts.Classic;
 using Entities;
 using Entities.Models.Classic;
 using Entities.ModelsPrepared;
+using Utilities;
 
 namespace Repository.Classic
 {
     public class CCreatureTemplateRepo : CRepositoryBase<CCreatureTemplate>, ICCreatureTemplateRepo
     {
+        private CRepositoryContext _repositoryContext;
+
         public CCreatureTemplateRepo(CRepositoryContext repositoryContext)
             : base(repositoryContext)
         {
+            _repositoryContext = repositoryContext;
         }
+
+        #region Creature Templates
 
         public async Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatessAsync()
         {
@@ -25,28 +32,6 @@ namespace Repository.Classic
         {
             var creatureTemplates = await FindByConditionAsync(x => x.CreatureType == creatureType);
             return creatureTemplates.OrderBy(x => x.Name);
-        }
-
-        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList()
-        {
-            var resultList = new List<NpcDetailsBase>();
-            var creatureTemplates = await GetAllCreatureTemplatessAsync();
-
-            foreach (var creatureTemplate in creatureTemplates)
-                resultList.Add(new NpcDetailsBase(creatureTemplate));
-
-            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
-        }
-
-        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultList(byte creatureType)
-        {
-            var resultList = new List<NpcDetailsBase>();
-            var creatureTemplates = await GetAllCreatureTemplatesByTypeAsync(creatureType);
-
-            foreach (var creatureTemplate in creatureTemplates)
-                resultList.Add(new NpcDetailsBase(creatureTemplate));
-
-            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
         }
 
         public async Task<CCreatureTemplate> GetCreatureTemplateByEntryAsync(uint entry)
@@ -61,16 +46,58 @@ namespace Repository.Classic
             return creatureTemplate.DefaultIfEmpty(new CCreatureTemplate()).FirstOrDefault();
         }
 
+        #endregion
+
+        #region Npcs
+
+        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList()
+        {
+            var resultList = new List<NpcDetailsBase>();
+            var creatureTemplates = await GetAllCreatureTemplatessAsync();
+
+            foreach (var creatureTemplate in creatureTemplates)
+                resultList.Add(new NpcDetailsBase(creatureTemplate));
+
+            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
+        }
+
+        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType)
+        {
+            var resultList = new List<NpcDetailsBase>();
+            var creatureTemplates = await GetAllCreatureTemplatesByTypeAsync(creatureType);
+
+            foreach (var creatureTemplate in creatureTemplates)
+                resultList.Add(new NpcDetailsBase(creatureTemplate));
+
+            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
+        }
+
         public async Task<NpcDetails> GetNpcDetailsByEntryAsync(uint entry)
         {
+            var spawns = _repositoryContext.Creatures.Where(x => x.Id == entry).ToList();
             var creatureTemplate = await GetCreatureTemplateByEntryAsync(entry);
-            return await Task.FromResult(new NpcDetails(creatureTemplate));
+            var npcDetails = new NpcDetails(creatureTemplate)
+            {
+                ExtraFlags = CreatureUtils.BreakDownExtraFlags(creatureTemplate.ExtraFlags),
+                MapSpawns = CommonUtils.GetMapSpawns(spawns)
+            };
+
+            return await Task.FromResult(npcDetails);
         }
 
         public async Task<NpcDetails> GetNpcDetailsByNameAsync(string name)
         {
             var creatureTemplate = await GetCreatureTemplateByNameAsync(name);
-            return await Task.FromResult(new NpcDetails(creatureTemplate));
+            var spawns = _repositoryContext.Creatures.Where(x => x.Id == creatureTemplate.Entry).ToList();
+            var npcDetails = new NpcDetails(creatureTemplate)
+            {
+                ExtraFlags = CreatureUtils.BreakDownExtraFlags(creatureTemplate.ExtraFlags),
+                MapSpawns = CommonUtils.GetMapSpawns(spawns)
+            };
+
+            return await Task.FromResult(npcDetails);
         }
+
+        #endregion
     }
 }

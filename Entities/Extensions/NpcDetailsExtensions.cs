@@ -1,5 +1,4 @@
-﻿using System;
-using Entities.ModelsPrepared;
+﻿using Entities.ModelsPrepared;
 
 namespace Entities.Extensions
 {

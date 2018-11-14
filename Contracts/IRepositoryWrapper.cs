@@ -5,6 +5,7 @@ namespace Contracts
 {
     public interface IRepositoryWrapper
     {
-        ICCreatureTemplateRepo CreatureTemplateRepository { get; }
+        ICCreatureTemplateRepo CreatureTemplatesRepo { get; }
+        ICCreatuteRepo CreaturesRepo { get; }
     }
 }

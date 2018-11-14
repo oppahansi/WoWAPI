@@ -23,7 +23,7 @@ namespace wowapi.Controllers.Classic
         {
             try
             {
-                var creatureList = await _repository.CreatureTemplateRepository.GetNpcsSearchResultList();               
+                var creatureList = await _repository.CreatureTemplatesRepo.GetNpcsSearchResultList();               
                 return Ok(creatureList.Take(250));
             }
             catch (Exception ex)
@@ -38,7 +38,7 @@ namespace wowapi.Controllers.Classic
         {
             try
             {
-                var creatureTemplates = await _repository.CreatureTemplateRepository.GetNpcsByTypeSearchResultList(type);
+                var creatureTemplates = await _repository.CreatureTemplatesRepo.GetNpcsByTypeSearchResultListAsync(type);
                 return Ok(creatureTemplates.Take(250));
             }
             catch (Exception ex)
