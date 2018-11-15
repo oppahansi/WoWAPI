@@ -32,9 +32,9 @@ namespace wowapi.Entities
         public DbSet<CCreatureEquipTemplateRaw> CreatureEquipTemplateRaws { get; set; }
         public DbSet<CCreatureInvolvedrelation> CreatureInvolvedrelations { get; set; }
         public DbSet<CCreatureLinking> CreatureLinkings { get; set; }
-        public DbSet<CCreatureLinkingTemplate> CreatureLinkingTemplates { get; set; }
+        public DbSet<CCreatureLinkingTemplate> CreatureLinkingTemplates { get; set; }*/
         public DbSet<CCreatureLootTemplate> CreatureLootTemplates { get; set; }
-        public DbSet<CCreatureModelInfo> CreatureModelInfos { get; set; }
+        /*public DbSet<CCreatureModelInfo> CreatureModelInfos { get; set; }
         public DbSet<CCreatureMovement> CreatureMovements { get; set; }
         public DbSet<CCreatureMovementTemplate> CreatureMovementTemplates { get; set; }
         public DbSet<CreatureOnkillReputationBase> CreatureOnkillReputations { get; set; }
@@ -83,9 +83,9 @@ namespace wowapi.Entities
         public DbSet<CInstanceTemplate> InstanceTemplates { get; set; }
         public DbSet<ItemEnchantmentTemplateBase> ItemEnchantmentTemplates { get; set; }
         public DbSet<CItemLootTemplate> ItemLootTemplates { get; set; }
-        public DbSet<CItemRequiredTarget> ItemRequiredTargets { get; set; }
+        public DbSet<CItemRequiredTarget> ItemRequiredTargets { get; set; }*/
         public DbSet<CItemTemplate> ItemTemplates { get; set; }
-        public DbSet<CLocalesCreature> LocalesCreatures { get; set; }
+        /*public DbSet<CLocalesCreature> LocalesCreatures { get; set; }
         public DbSet<CLocalesGameobject> LocalesGameobjects { get; set; }
         public DbSet<CLocalesGossipMenuOption> LocalesGossipMenuOptions { get; set; }
         public DbSet<CLocalesItem> LocalesItems { get; set; }
@@ -124,10 +124,10 @@ namespace wowapi.Entities
         public DbSet<PoolPoolBase> PoolPools { get; set; }
         public DbSet<PoolTemplateBase> PoolTemplates { get; set; }
         public DbSet<CQuestGiverGreeting> QuestGiverGreetings { get; set; }
-        public DbSet<CQuestTemplate> QuestTemplates { get; set; }
+        public DbSet<CQuestTemplate> QuestTemplates { get; set; }*/
         public DbSet<CReferenceLootTemplate> ReferenceLootTemplates { get; set; }
         public DbSet<CReferenceLootTemplateNames> ReferenceLootTemplateNames { get; set; }
-        public DbSet<ReputationRewardRateBase> ReputationRewardRates { get; set; }
+        /*public DbSet<ReputationRewardRateBase> ReputationRewardRates { get; set; }
         public DbSet<ReputationSpilloverTemplateBase> ReputationSpilloverTemplates { get; set; }
         public DbSet<CReservedName> ReservedNames { get; set; }
         public DbSet<CScriptedAreaTrigger> ScriptedAreaTriggers { get; set; }
