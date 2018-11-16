@@ -19,7 +19,7 @@ namespace wowapi.Controllers.Classic
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetNpcsSearchResultList()
+        public async Task<IActionResult> GetNpcs()
         {
             try
             {
@@ -28,13 +28,13 @@ namespace wowapi.Controllers.Classic
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Some error in the GetAllCreatureTemplates method: {ex}");
+                _logger.LogError($"Some error in the GetNpcs method: {ex}");
                 return StatusCode(500, "Internal server error");
             }
         }
 
-        [HttpGet("{type}", Name = "CreatureTemplatesByType")]
-        public async Task<IActionResult> GetAllCreatureTemplateByType(byte type)
+        [HttpGet("{type:byte}", Name = "NpcsByType")]
+        public async Task<IActionResult> GetNpcsByType(byte type)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace wowapi.Controllers.Classic
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside GetAllCreatureTemplateByType action: {ex.Message}");
+                _logger.LogError($"Something went wrong inside GetNpcsByType action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }

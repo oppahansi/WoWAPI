@@ -8,6 +8,9 @@ namespace wowapi.Entities.ModelsPrepared
     {
         public string Ainame { get; }
         public string ScriptName { get; }
+        public uint MinLootGold { get; }
+        public uint MaxLootGold { get; }
+        public IEnumerable<IEntity> Loot { get; }
         public IEnumerable<string> NpcFlags { get; }
         public IEnumerable<string> ExtraFlags { get; }
         public IEnumerable<string> Immunities { get; }
@@ -21,6 +24,9 @@ namespace wowapi.Entities.ModelsPrepared
             NpcFlags = CreatureUtils.BreakDownNpcFlags(creatureTemplate.NpcFlags);
             Immunities = CreatureUtils.BreakDownNpcImmunities(creatureTemplate.MechanicImmuneMask);
             Resistances = CreatureUtils.GetResistances(creatureTemplate);
+            MinLootGold = creatureTemplate.MinLootGold;
+            MaxLootGold = creatureTemplate.MaxLootGold;
+
         }
     }
 }

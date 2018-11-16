@@ -18,7 +18,7 @@ namespace wowapi.Controllers.Classic
             _repository = repository;
         }
 
-        [HttpGet("{entry}", Name = "GetNpcDetails")]
+        [HttpGet("{entry:uint}", Name = "GetNpcDetails")]
         public async Task<IActionResult> GetNpcDetails(uint entry)
         {
             try

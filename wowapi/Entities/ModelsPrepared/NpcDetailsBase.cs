@@ -1,4 +1,6 @@
-﻿using wowapi.Entities.Dictionaries;
+﻿using System.Collections;
+using System.Collections.Generic;
+using wowapi.Entities.Dictionaries;
 using wowapi.Entities.Models.Classic;
 using wowapi.Entities.Models.Tbc;
 using wowapi.Entities.Models.Wotlk;
@@ -16,8 +18,6 @@ namespace wowapi.Entities.ModelsPrepared
         public string Rank { get; }
         public string ReactAlliance { get; }
         public string ReactHorde { get; }
-        public uint MinLootGold { get; }
-        public uint MaxLootGold { get; }
 
         public NpcDetailsBase(CCreatureTemplate creatureTemplate)
         {
@@ -28,8 +28,6 @@ namespace wowapi.Entities.ModelsPrepared
             MaxLevel = creatureTemplate.MaxLevel;
             CreatureType = CreatureDictionary.CreatureTypes.ContainsKey(creatureTemplate.CreatureType) ? CreatureDictionary.CreatureTypes[creatureTemplate.CreatureType] : "Type Unspecified";
             Rank = CreatureDictionary.Ranks.ContainsKey(creatureTemplate.Rank) ? CreatureDictionary.Ranks[creatureTemplate.Rank] : "Rank Unspecified";
-            MinLootGold = creatureTemplate.MinLootGold;
-            MaxLootGold = creatureTemplate.MaxLootGold;
         }
 
         public NpcDetailsBase(TCreatureTemplate creatureTemplate)
