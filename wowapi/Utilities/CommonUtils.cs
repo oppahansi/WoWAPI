@@ -1,8 +1,7 @@
-﻿using wowapi.Entities.Models.Classic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Microsoft.AspNetCore.Http;
+using wowapi.Entities.Models.Classic;
 
 namespace wowapi.Utilities
 {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using wowapi.Enumerations;
-using wowapi.Entities.Models.Classic;
 using wowapi.Dictionaries;
+using wowapi.Enumerations;
 
 namespace wowapi.Utilities
 {

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
-using wowapi.Extensions;
-using Microsoft.AspNetCore.Mvc;
 using wowapi.Contracts;
+using wowapi.Extensions;
 
 namespace wowapi.Controllers.Classic
 {

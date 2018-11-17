@@ -1,5 +1,4 @@
-﻿using System;
-namespace wowapi.Entities
+﻿namespace wowapi.Entities
 {
     public interface IEntity
     {

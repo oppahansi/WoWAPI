@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using wowapi.Dictionaries;
-using wowapi.Entities.Models.Classic;
+﻿using wowapi.Entities.Models.Classic;
 using wowapi.Entities.Models.Tbc;
 using wowapi.Entities.Models.Wotlk;
 

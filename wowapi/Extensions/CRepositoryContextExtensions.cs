@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using wowapi.Contracts.Classic;
 using wowapi.Entities;
 using wowapi.Entities.Models.Classic;
 

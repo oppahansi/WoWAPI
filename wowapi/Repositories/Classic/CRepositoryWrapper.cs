@@ -1,6 +1,6 @@
-﻿using wowapi.Contracts.Classic;
+﻿using wowapi.Contracts;
+using wowapi.Contracts.Classic;
 using wowapi.Entities;
-using wowapi.Contracts;
 
 namespace wowapi.Repository.Classic
 {

@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using wowapi.Entities.Models.Classic;
+﻿using wowapi.Entities.Models.Classic;
 using wowapi.Entities.Models.Tbc;
 using wowapi.Entities.Models.Wotlk;
-using wowapi.Utilities;
 
 namespace wowapi.Entities.ModelsPrepared
 {

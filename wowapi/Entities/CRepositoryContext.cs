@@ -1,6 +1,5 @@
-﻿using wowapi.Entities.Models.Classic;
-using wowapi.Entities.Models.Common;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using wowapi.Entities.Models.Classic;
 
 namespace wowapi.Entities
 {
