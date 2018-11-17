@@ -1,3 +1,5 @@
+using System.Reflection;
+using System.Text;
 using wowapi.Enumerations;
 
 namespace wowapi.Entities.Models.Search
@@ -16,5 +18,20 @@ namespace wowapi.Entities.Models.Search
         public uint MechanicImmuneMask { get; set; } = 0;
         public uint SchoolImmuneMask { get; set; } = 0;
         public byte Civilian { get; set; } = 2;
+        // TODO
+        //public string SortOrder { get; set; }
+
+        public override string ToString()
+        {
+            var properties = this.GetType().GetProperties();
+            var builder = new StringBuilder();
+
+            builder.Append($"[{this.GetType().ToString()}]\n");
+
+            foreach (var property in properties)
+                builder.Append($"[{property.Name}]: {property.GetValue(this, null)}\n");
+
+            return builder.ToString();
+        }
     }
 }

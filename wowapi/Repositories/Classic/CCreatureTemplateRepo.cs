@@ -127,7 +127,6 @@ namespace wowapi.Repository.Classic
 
         public async Task<NpcDetails> GetNpcDetailsByFiltersAsync(CreatureFilterParams filterParams)
         {
-            filterParams.FilterType = (byte)CommonEnums.FilterTypes.ANY;
             var searchResult = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType);
             return await Task.FromResult(new NpcDetails(searchResult.DefaultIfEmpty(new CCreatureTemplate()).FirstOrDefault()));
         }

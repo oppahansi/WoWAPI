@@ -76,7 +76,7 @@ namespace wowapi.Utilities
                 filters.Add(x => x.Family == filterParams.Family);
             }
 
-            if (filterParams.Type != 0)
+            if (filterParams.Type != 100)
                 filters.Add(x => x.CreatureType == filterParams.Type);
 
             if (filterParams.NpcFlags != 0)

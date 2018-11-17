@@ -51,11 +51,11 @@ namespace wowapi.Controllers.Classic
 
                 if (npcDetails.IsEmptyObject())
                 {
-                    _logger.LogError($"Npc details with filterParams, hasn't been found in db.");
+                    _logger.LogError($"Npc details with provided filterParams, hasn't been found in db. {filterParams.ToString()}");
                     return NotFound();
                 }
 
-                _logger.LogInfo($"Returned npc details with filterParams.");
+                _logger.LogInfo($"Returned npc details with provided filterParams. {filterParams.ToString()}");
                 return Ok(npcDetails);
             }
             catch (Exception ex)
