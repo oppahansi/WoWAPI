@@ -46,6 +46,6 @@ namespace wowapi.Utilities
             }
 
             return spellMechanicsList;
-        }        
+        }     
     }
 }

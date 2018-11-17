@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using wowapi.Contracts.Classic;
@@ -8,6 +9,7 @@ using wowapi.Entities.Models.Search;
 using wowapi.Entities.ModelsPrepared;
 using wowapi.Enumerations;
 using wowapi.Extensions;
+using wowapi.Utilities;
 
 namespace wowapi.Repository.Classic
 {
@@ -23,15 +25,30 @@ namespace wowapi.Repository.Classic
 
         #region Creature Templates
 
-        public async Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatessAsync()
+        public async Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatessAsync(CreatureFilterParams filterParams)
         {
-            var creatureTemplates = await FindAllAsync();
+            IEnumerable<CCreatureTemplate> creatureTemplates;
+
+            if (filterParams.IsEmpty())
+                creatureTemplates = await FindAllAsync();
+            else
+                creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType);
+                
             return creatureTemplates.OrderBy(x => x.Name);
         }
 
-        public async Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatesByTypeAsync(byte creatureType)
+        public async Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatesByTypeAsync(byte creatureType, CreatureFilterParams filterParams)
         {
-            var creatureTemplates = await FindByConditionAsync(x => x.CreatureType == creatureType);
+            IEnumerable<CCreatureTemplate> creatureTemplates;
+
+            if (filterParams.IsEmpty())
+                creatureTemplates = await FindByConditionAsync(x => x.CreatureType == creatureType);
+            else
+            {
+                filterParams.Type = creatureType;
+                creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType);
+            }
+
             return creatureTemplates.OrderBy(x => x.Name);
         }
 
@@ -54,41 +71,64 @@ namespace wowapi.Repository.Classic
         public async Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList(CreatureFilterParams filterParams)
         {
             var resultList = new List<NpcDetailsBase>();
-            var creatureTemplates = await GetAllCreatureTemplatessAsync();
-            
-            if (!filterParams.IsEmpty())
-                _repositoryContext.Filter(ref creatureTemplates, filterParams);
+            IEnumerable<CCreatureTemplate> creatureTemplates;
+
+            if (filterParams.IsEmpty())
+                creatureTemplates = await FindAllAsync();
+            else
+                creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType);
 
             foreach (var creatureTemplate in creatureTemplates)
                 resultList.Add(new NpcDetailsBase(creatureTemplate));
 
-            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
+            return resultList.OrderBy(x => x.Name);
         }
 
         public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType, CreatureFilterParams filterParams)
         {
             var resultList = new List<NpcDetailsBase>();
-            var creatureTemplates = await GetAllCreatureTemplatesByTypeAsync(creatureType);
+            IEnumerable<CCreatureTemplate> creatureTemplates;
 
-            if (!filterParams.IsEmpty())
-                _repositoryContext.Filter(ref creatureTemplates, filterParams);
+            if (filterParams.IsEmpty())
+                creatureTemplates = await FindByConditionAsync(x => x.CreatureType == creatureType);
+            else
+            {
+                filterParams.Type = creatureType;
+                creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType);
+            }
 
             foreach (var creatureTemplate in creatureTemplates)
                 resultList.Add(new NpcDetailsBase(creatureTemplate));
 
-            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
+            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList.OrderBy(x => x.Name));
+        }
+
+        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByFamilySearchResultListAsync(sbyte creatureFamily, CreatureFilterParams filterParams)
+        {
+            var resultList = new List<NpcDetailsBase>();
+            IEnumerable<CCreatureTemplate> creatureTemplates;
+
+            filterParams.FilterType = 0;
+            filterParams.Type = 1;
+            filterParams.Family = creatureFamily;
+            creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType);
+
+            foreach (var creatureTemplate in creatureTemplates)
+                resultList.Add(new NpcDetailsBase(creatureTemplate));
+
+            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList.OrderBy(x => x.Name));
         }
 
         public async Task<NpcDetails> GetNpcDetailsByEntryAsync(uint entry)
         {
-            var creatureTemplate = await GetCreatureTemplateByEntryAsync(entry);
-            return await Task.FromResult(new NpcDetails(creatureTemplate));
+            var searchResult = await FindByConditionAsync(x => x.Entry == entry);
+            return await Task.FromResult(new NpcDetails(searchResult.DefaultIfEmpty(new CCreatureTemplate()).FirstOrDefault()));
         }
 
         public async Task<NpcDetails> GetNpcDetailsByNameAsync(string name)
         {
-            var creatureTemplate = await GetCreatureTemplateByNameAsync(name);
-            return await Task.FromResult(new NpcDetails(creatureTemplate));
+            var searchResult = await FindByConditionAsync(x => string.Compare(x.Name.ToLower(), name.ToLower(), System.StringComparison.Ordinal) == 0);
+            return await Task.FromResult(new NpcDetails(searchResult.DefaultIfEmpty(new CCreatureTemplate()).FirstOrDefault()));
         }
 
         #endregion

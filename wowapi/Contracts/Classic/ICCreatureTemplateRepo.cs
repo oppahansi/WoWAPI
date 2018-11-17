@@ -10,8 +10,8 @@ namespace wowapi.Contracts.Classic
     {
         #region Creature Templates - Raw Db
 
-        Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatessAsync();
-        Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatesByTypeAsync(byte creatureType);
+        Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatessAsync(CreatureFilterParams filterParams);
+        Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatesByTypeAsync(byte creatureType, CreatureFilterParams filterParams);
         Task<CCreatureTemplate> GetCreatureTemplateByEntryAsync(uint entry);
         Task<CCreatureTemplate> GetCreatureTemplateByNameAsync(string name);
 
@@ -22,6 +22,7 @@ namespace wowapi.Contracts.Classic
 
         Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList(CreatureFilterParams filterParams);
         Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType, CreatureFilterParams filterParams);
+        Task<IEnumerable<NpcDetailsBase>> GetNpcsByFamilySearchResultListAsync(sbyte creatureFamily, CreatureFilterParams filterParams);
         Task<NpcDetails> GetNpcDetailsByEntryAsync(uint entry);
         Task<NpcDetails> GetNpcDetailsByNameAsync(string name);
 

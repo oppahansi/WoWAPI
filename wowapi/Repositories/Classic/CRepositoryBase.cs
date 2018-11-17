@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using wowapi.Entities;
+using wowapi.Enumerations;
 
 namespace wowapi.Repository.Classic
 {
@@ -26,6 +27,17 @@ namespace wowapi.Repository.Classic
         public async Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression)
         {
             return await this.RepositoryContext.Set<T>().Where(expression).ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> FindAllByConditionsAsync(List<Func<T, bool>> filters, byte filterType)
+        {
+            switch(filterType)
+            {
+                case (byte)CommonEnums.FilterTypes.ANY:
+                    return await this.RepositoryContext.Set<T>().Where(x => filters.Any(f => f(x))).ToListAsync();
+                default:
+                    return await this.RepositoryContext.Set<T>().Where(x => filters.All(f => f(x))).ToListAsync();
+            }
         }
 
         public void Create(T entity)

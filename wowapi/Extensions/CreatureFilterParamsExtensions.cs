@@ -12,7 +12,7 @@ namespace wowapi.Extensions
             creatureFilterParams.MinLevel == 0 &&
             creatureFilterParams.MaxLevel == 0 &&
             creatureFilterParams.Family == 0 && 
-            creatureFilterParams.Type == 0 &&
+            creatureFilterParams.Type == 100 &&
             creatureFilterParams.NpcFlags == 0 &&
             creatureFilterParams.ExtraFlags == 0 &&
             creatureFilterParams.MechanicImmuneMask == 0 &&

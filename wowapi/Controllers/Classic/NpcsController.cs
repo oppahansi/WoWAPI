@@ -26,7 +26,6 @@ namespace wowapi.Controllers.Classic
             try
             {
                 var creatureList = await _repository.CreatureTemplatesRepo.GetNpcsSearchResultList(filterParams);
-
                 return Ok(creatureList.Take(250));
             }
             catch (Exception ex)
@@ -47,6 +46,22 @@ namespace wowapi.Controllers.Classic
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside GetNpcsByType action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        
+        [HttpGet("1/{family}", Name = "NpcsByFamily")]
+        public async Task<IActionResult> GetNpcsByFamily(sbyte family, [FromQuery] CreatureFilterParams filterParams)
+        {
+            try
+            {
+                var creatureTemplates = await _repository.CreatureTemplatesRepo.GetNpcsByFamilySearchResultListAsync(family, filterParams);
+                return Ok(creatureTemplates.Take(250));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetNpcsByFamily action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }
