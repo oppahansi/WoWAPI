@@ -60,8 +60,8 @@ namespace wowapi.Utilities
                         return x.SubName.ToLower().CompareTo(filterParams.SubName.ToLower()) == 0 || x.SubName.ToLower().Contains(filterParams.SubName.ToLower());
                     else
                         return false;
-                });  
-            } 
+                });
+            }
 
             if (filterParams.MinLevel != 0)
                 filters.Add(x => x.MinLevel == filterParams.MinLevel);
@@ -73,7 +73,7 @@ namespace wowapi.Utilities
             {
                 filterParams.FilterType = 0;
                 filterParams.Type = 1;
-                filters.Add(x => x.Family == filterParams.Family);   
+                filters.Add(x => x.Family == filterParams.Family);
             }
 
             if (filterParams.Type != 0)
@@ -87,6 +87,9 @@ namespace wowapi.Utilities
 
             if (filterParams.MechanicImmuneMask != 0)
                 filters.Add(x => (x.MechanicImmuneMask & (uint)filterParams.MechanicImmuneMask) == (uint)filterParams.MechanicImmuneMask);
+
+            if (filterParams.SchoolImmuneMask != 0)
+                filters.Add(x => (x.SchoolImmuneMask & (uint)filterParams.SchoolImmuneMask) == (uint)filterParams.SchoolImmuneMask);
 
             if (filterParams.Civilian != 2)
                 filters.Add(x => x.Civilian == filterParams.Civilian);

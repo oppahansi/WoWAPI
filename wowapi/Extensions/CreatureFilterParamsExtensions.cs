@@ -16,6 +16,7 @@ namespace wowapi.Extensions
             creatureFilterParams.NpcFlags == 0 &&
             creatureFilterParams.ExtraFlags == 0 &&
             creatureFilterParams.MechanicImmuneMask == 0 &&
+            creatureFilterParams.SchoolImmuneMask == 0 &&
             creatureFilterParams.Civilian == 2;
         }
     }

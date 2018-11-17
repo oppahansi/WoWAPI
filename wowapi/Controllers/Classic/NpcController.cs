@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using wowapi.Contracts;
+using wowapi.Entities.Models.Search;
 using wowapi.Extensions;
 
 namespace wowapi.Controllers.Classic
@@ -42,19 +43,19 @@ namespace wowapi.Controllers.Classic
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetNpcDetails([FromQuery] string name)
+        public async Task<IActionResult> GetNpcDetails([FromQuery] CreatureFilterParams filterParams)
         {
             try
             {
-                var npcDetails = await _repository.CreatureTemplatesRepo.GetNpcDetailsByNameAsync(name);
+                var npcDetails = await _repository.CreatureTemplatesRepo.GetNpcDetailsByFiltersAsync(filterParams);
 
                 if (npcDetails.IsEmptyObject())
                 {
-                    _logger.LogError($"Npc details with name: {name}, hasn't been found in db.");
+                    _logger.LogError($"Npc details with filterParams, hasn't been found in db.");
                     return NotFound();
                 }
 
-                _logger.LogInfo($"Returned npc details with name: {name}");
+                _logger.LogInfo($"Returned npc details with filterParams.");
                 return Ok(npcDetails);
             }
             catch (Exception ex)

@@ -14,6 +14,7 @@ namespace wowapi.Entities.Models.Search
         public uint NpcFlags { get; set; } = 0;
         public uint ExtraFlags { get; set; } = 0;
         public uint MechanicImmuneMask { get; set; } = 0;
+        public uint SchoolImmuneMask { get; set; } = 0;
         public byte Civilian { get; set; } = 2;
     }
 }

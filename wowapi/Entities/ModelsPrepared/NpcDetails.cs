@@ -16,7 +16,8 @@ namespace wowapi.Entities.ModelsPrepared
         public uint VendorTemplateId { get; }
         public uint NpcFlags { get; }
         public uint ExtraFlags { get; }
-        public uint Immunities { get; }
+        public uint MechanicImmunities { get; }
+        public uint SchoolImmunities { get; }
         public short ResistanceHoly { get; }
         public short ResistanceFire { get; }
         public short ResistanceNature { get; }
@@ -36,7 +37,8 @@ namespace wowapi.Entities.ModelsPrepared
             VendorTemplateId = creatureTemplate.VendorTemplateId;
             ExtraFlags = creatureTemplate.ExtraFlags;
             NpcFlags = creatureTemplate.NpcFlags;
-            Immunities = creatureTemplate.MechanicImmuneMask;
+            MechanicImmunities = creatureTemplate.MechanicImmuneMask;
+            SchoolImmunities = creatureTemplate.SchoolImmuneMask;
             ResistanceHoly = creatureTemplate.ResistanceHoly;
             ResistanceFire = creatureTemplate.ResistanceFire;
             ResistanceNature = creatureTemplate.ResistanceNature;
@@ -57,7 +59,8 @@ namespace wowapi.Entities.ModelsPrepared
             VendorTemplateId = creatureTemplate.VendorTemplateId;
             ExtraFlags = creatureTemplate.ExtraFlags;
             NpcFlags = creatureTemplate.NpcFlags;
-            Immunities = creatureTemplate.MechanicImmuneMask;
+            MechanicImmunities = creatureTemplate.MechanicImmuneMask;
+            SchoolImmunities = creatureTemplate.SchoolImmuneMask;
             ResistanceHoly = creatureTemplate.ResistanceHoly;
             ResistanceFire = creatureTemplate.ResistanceFire;
             ResistanceNature = creatureTemplate.ResistanceNature;
@@ -78,7 +81,8 @@ namespace wowapi.Entities.ModelsPrepared
             VendorTemplateId = creatureTemplate.Entry;
             ExtraFlags = creatureTemplate.FlagsExtra;
             NpcFlags = creatureTemplate.Npcflag;
-            Immunities = creatureTemplate.MechanicImmuneMask;
+            MechanicImmunities = creatureTemplate.MechanicImmuneMask;
+            SchoolImmunities = creatureTemplate.SpellSchoolImmuneMask;
             ResistanceHoly = creatureTemplate.Resistance1;
             ResistanceFire = creatureTemplate.Resistance2;
             ResistanceNature = creatureTemplate.Resistance3;

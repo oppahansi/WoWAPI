@@ -108,7 +108,7 @@ namespace wowapi.Repository.Classic
             var resultList = new List<NpcDetailsBase>();
             IEnumerable<CCreatureTemplate> creatureTemplates;
 
-            filterParams.FilterType = 0;
+            filterParams.FilterType = (byte)CommonEnums.FilterTypes.ALL;
             filterParams.Type = 1;
             filterParams.Family = creatureFamily;
             creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType);
@@ -125,9 +125,10 @@ namespace wowapi.Repository.Classic
             return await Task.FromResult(new NpcDetails(searchResult.DefaultIfEmpty(new CCreatureTemplate()).FirstOrDefault()));
         }
 
-        public async Task<NpcDetails> GetNpcDetailsByNameAsync(string name)
+        public async Task<NpcDetails> GetNpcDetailsByFiltersAsync(CreatureFilterParams filterParams)
         {
-            var searchResult = await FindByConditionAsync(x => string.Compare(x.Name.ToLower(), name.ToLower(), System.StringComparison.Ordinal) == 0);
+            filterParams.FilterType = (byte)CommonEnums.FilterTypes.ANY;
+            var searchResult = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType);
             return await Task.FromResult(new NpcDetails(searchResult.DefaultIfEmpty(new CCreatureTemplate()).FirstOrDefault()));
         }
 

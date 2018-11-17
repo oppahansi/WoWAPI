@@ -24,7 +24,7 @@ namespace wowapi.Contracts.Classic
         Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType, CreatureFilterParams filterParams);
         Task<IEnumerable<NpcDetailsBase>> GetNpcsByFamilySearchResultListAsync(sbyte creatureFamily, CreatureFilterParams filterParams);
         Task<NpcDetails> GetNpcDetailsByEntryAsync(uint entry);
-        Task<NpcDetails> GetNpcDetailsByNameAsync(string name);
+        Task<NpcDetails> GetNpcDetailsByFiltersAsync(CreatureFilterParams filterParams);
 
         #endregion
     }
