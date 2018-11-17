@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace wowapi.Entities.Dictionaries
+namespace wowapi.Dictionaries
 {
     public static class ItemDictionary
     {

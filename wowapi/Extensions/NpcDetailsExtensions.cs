@@ -1,6 +1,6 @@
 ﻿using wowapi.Entities.ModelsPrepared;
 
-namespace wowapi.Entities.Extensions
+namespace wowapi.Extensions
 {
     public static class NpcDetailsExtensions
     {

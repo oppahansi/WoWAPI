@@ -1,5 +1,5 @@
 ﻿using System;
-namespace wowapi.Entities.Enumerations
+namespace wowapi.Enumerations
 {
     public static class CreatureEnums
     {

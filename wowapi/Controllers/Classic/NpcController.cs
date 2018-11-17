@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using wowapi.Entities.Extensions;
+using wowapi.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using wowapi.Contracts;
 
 namespace wowapi.Controllers.Classic
 {
     [Route("api/c/[controller]")]
-    public class NpcController : Controller
+    public class NpcController : ControllerBase
     {
         private ILoggerManager _logger;
         private IRepositoryWrapper _repository;
@@ -18,7 +18,7 @@ namespace wowapi.Controllers.Classic
             _repository = repository;
         }
 
-        [HttpGet("{entry:uint}", Name = "GetNpcDetails")]
+        [HttpGet("{entry}", Name = "GetNpcDetails")]
         public async Task<IActionResult> GetNpcDetails(uint entry)
         {
             try

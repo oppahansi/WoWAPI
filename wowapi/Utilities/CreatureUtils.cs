@@ -1,7 +1,7 @@
-﻿using wowapi.Entities.Enumerations;
-using System.Collections.Generic;
-using wowapi.Entities.Dictionaries;
+﻿using System.Collections.Generic;
+using wowapi.Enumerations;
 using wowapi.Entities.Models.Classic;
+using wowapi.Dictionaries;
 
 namespace wowapi.Utilities
 {
@@ -47,43 +47,6 @@ namespace wowapi.Utilities
             }
 
             return spellMechanicsList;
-        }
-
-        public static IEnumerable<string> GetResistances(CCreatureTemplate creatureTemplate)
-        {
-            var resistances = new List<string>();
-
-            if (creatureTemplate.ResistanceFire != 0)
-            {
-                if (creatureTemplate.ResistanceFire > 0) resistances.Add($"Fire resistance: {creatureTemplate.ResistanceFire}");
-                else resistances.Add($"Fire resistance: Immune");
-            }
-
-            if (creatureTemplate.ResistanceNature != 0)
-            {
-                if (creatureTemplate.ResistanceNature > 0) resistances.Add($"Nature resistance: {creatureTemplate.ResistanceNature}");
-                else resistances.Add($"Nature resistance: Immune");
-            }
-
-            if (creatureTemplate.ResistanceFrost != 0)
-            {
-                if (creatureTemplate.ResistanceFrost > 0) resistances.Add($"Frost resistance: {creatureTemplate.ResistanceFrost}");
-                else resistances.Add($"Frost resistance: Immune");
-            }
-
-            if (creatureTemplate.ResistanceShadow != 0)
-            {
-                if (creatureTemplate.ResistanceShadow > 0) resistances.Add($"Shadow resistance: {creatureTemplate.ResistanceShadow}");
-                else resistances.Add($"Shadow resistance: Immune");
-            }
-
-            if (creatureTemplate.ResistanceArcane != 0)
-            {
-                if (creatureTemplate.ResistanceArcane > 0) resistances.Add($"Frost resistance: {creatureTemplate.ResistanceArcane}");
-                else resistances.Add($"Arcane resistance: Immune");
-            }
-
-            return resistances;
-        }
+        }        
     }
 }

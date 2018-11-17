@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using wowapi.Contracts;
+using wowapi.Entities.Models.Classic;
+using wowapi.Entities.ModelsPrepared;
 
 namespace wowapi.Controllers.Classic
 {
     [Route("api/c/[controller]")]
-    public class NpcsController : Controller
+    public class NpcsController : ControllerBase
     {
         private ILoggerManager _logger;
         private IRepositoryWrapper _repository;
@@ -19,11 +23,12 @@ namespace wowapi.Controllers.Classic
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetNpcs()
-        {
+        public async Task<IActionResult> GetNpcs([FromQuery] CCreatureTemplate queryModel, [FromQuery] byte filterType = 0)
+        {   
             try
             {
-                var creatureList = await _repository.CreatureTemplatesRepo.GetNpcsSearchResultList();               
+                var creatureList = await _repository.CreatureTemplatesRepo.GetNpcsSearchResultList(queryModel, filterType);
+
                 return Ok(creatureList.Take(250));
             }
             catch (Exception ex)
@@ -33,7 +38,7 @@ namespace wowapi.Controllers.Classic
             }
         }
 
-        [HttpGet("{type:byte}", Name = "NpcsByType")]
+        [HttpGet("{type}", Name = "NpcsByType")]
         public async Task<IActionResult> GetNpcsByType(byte type)
         {
             try

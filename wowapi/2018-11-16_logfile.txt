@@ -1,0 +1,11 @@
+2018-11-16 21:49:23.0660 INFO Returned npc details with entry: 11583
+2018-11-16 21:50:54.5951 INFO Returned npc details with entry: 11583
+2018-11-16 21:54:06.4049 INFO Returned npc details with entry: 11583
+2018-11-16 21:54:07.7690 INFO Returned npc details with entry: 11583
+2018-11-16 21:54:08.5967 INFO Returned npc details with entry: 11583
+2018-11-16 21:56:04.6569 INFO Returned npc details with entry: 11583
+2018-11-16 21:56:05.5889 INFO Returned npc details with entry: 11583
+2018-11-16 21:56:44.1502 INFO Returned npc details with entry: 11583
+2018-11-16 22:44:58.4487 ERROR QUERY PARAMS NULL : False
+2018-11-16 22:50:37.3763 ERROR NAME: name - VALUE: test
+2018-11-16 22:50:37.4031 ERROR NAME: lvl - VALUE: 10

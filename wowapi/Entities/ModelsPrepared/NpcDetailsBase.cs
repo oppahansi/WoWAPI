@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using wowapi.Entities.Dictionaries;
+using wowapi.Dictionaries;
 using wowapi.Entities.Models.Classic;
 using wowapi.Entities.Models.Tbc;
 using wowapi.Entities.Models.Wotlk;
@@ -14,8 +14,8 @@ namespace wowapi.Entities.ModelsPrepared
         public string SubName { get; }
         public byte MinLevel { get; }
         public byte MaxLevel { get; }
-        public string CreatureType { get; }
-        public string Rank { get; }
+        public byte CreatureType { get; }
+        public byte Rank { get; }
         public string ReactAlliance { get; }
         public string ReactHorde { get; }
 
@@ -26,18 +26,32 @@ namespace wowapi.Entities.ModelsPrepared
             SubName = creatureTemplate.SubName;
             MinLevel = creatureTemplate.MinLevel;
             MaxLevel = creatureTemplate.MaxLevel;
-            CreatureType = CreatureDictionary.CreatureTypes.ContainsKey(creatureTemplate.CreatureType) ? CreatureDictionary.CreatureTypes[creatureTemplate.CreatureType] : "Type Unspecified";
-            Rank = CreatureDictionary.Ranks.ContainsKey(creatureTemplate.Rank) ? CreatureDictionary.Ranks[creatureTemplate.Rank] : "Rank Unspecified";
+            CreatureType = creatureTemplate.CreatureType;
+            Rank = creatureTemplate.Rank;
+            // ReactAlliance
+            // ReactHorde
         }
 
         public NpcDetailsBase(TCreatureTemplate creatureTemplate)
         {
-
+            Entry = creatureTemplate.Entry;
+            Name = creatureTemplate.Name;
+            SubName = creatureTemplate.SubName;
+            MinLevel = creatureTemplate.MinLevel;
+            MaxLevel = creatureTemplate.MaxLevel;
+            CreatureType = creatureTemplate.CreatureType;
+            Rank = creatureTemplate.Rank;
         }
 
         public NpcDetailsBase(WCreatureTemplate creatureTemplate)
         {
-
+            Entry = creatureTemplate.Entry;
+            Name = creatureTemplate.Name;
+            SubName = creatureTemplate.SubName;
+            MinLevel = creatureTemplate.MinLevel;
+            MaxLevel = creatureTemplate.MaxLevel;
+            CreatureType = creatureTemplate.Type;
+            Rank = creatureTemplate.Rank;
         }
     }
 }

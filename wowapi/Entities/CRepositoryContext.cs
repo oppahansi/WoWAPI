@@ -11,6 +11,16 @@ namespace wowapi.Entities
         {
         }
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CReferenceLootTemplate>().HasKey(x => new { x.Entry, x.Item });
+            modelBuilder.Entity<CCreatureLootTemplate>().HasKey(x => new { x.Entry, x.Item });
+            modelBuilder.Entity<CNpcVendor>().HasKey(x => new { x.Entry, x.Item });
+            modelBuilder.Entity<CNpcVendorTemplate>().HasKey(x => new { x.Entry, x.Item });
+            modelBuilder.Entity<CPickPocketingLootTemplate>().HasKey(x => new { x.Entry, x.Item });
+        }
+
        /* public DbSet<AreatriggerInvolvedrelationBase> AreatriggerInvolvedrelations { get; set; }
         public DbSet<AreatriggerTavernBase> AreatriggerTaverns { get; set; }
         public DbSet<CAreatriggerTeleport> AreatriggerTeleports { get; set; }
@@ -21,7 +31,7 @@ namespace wowapi.Entities
         public DbSet<CBugreport> Bugreports { get; set; }
         public DbSet<CCommand> Commands { get; set; }
         public DbSet<CConditions> Conditionss { get; set; }*/
-        public DbSet<CCreature> Creatures { get; set; }/*
+        /* public DbSet<CCreature> Creatures { get; set; }/*
         public DbSet<CCreatureAiScripts> CreatureAiScripts { get; set; }
         public DbSet<CCreatureAiSummons> CreatureAiSummons { get; set; }
         public DbSet<CCreatureAiTexts> CreatureAiTexts { get; set; }
@@ -100,16 +110,16 @@ namespace wowapi.Entities
         public DbSet<CNpcGossip> NpcGossips { get; set; }
         public DbSet<CNpcText> NpcTexts { get; set; }
         public DbSet<CNpcTrainer> NpcTrainers { get; set; }
-        public DbSet<CNpcTrainerTemplate> NpcTrainerTemplates { get; set; }
+        public DbSet<CNpcTrainerTemplate> NpcTrainerTemplates { get; set; }*/
         public DbSet<CNpcVendor> NpcVendors { get; set; }
         public DbSet<CNpcVendorTemplate> NpcVendorTemplates { get; set; }
-        public DbSet<CPageText> PageTexts { get; set; }
+        /* public DbSet<CPageText> PageTexts { get; set; }
         public DbSet<CPetCreateInfoSpell> PetCreateInfoSpells { get; set; }
         public DbSet<CPetFamilyStats> PetFamilyStats { get; set; }
         public DbSet<PetLevelStatsBase> PetLevelStats { get; set; }
-        public DbSet<CPetNameGeneration> PetNameGenerations { get; set; }
+        public DbSet<CPetNameGeneration> PetNameGenerations { get; set; }*/
         public DbSet<CPickPocketingLootTemplate> PickPocketingLootTemplates { get; set; }
-        public DbSet<PlayerClassLevelStatsBase> PlayerClassLevelStats { get; set; }
+        /*public DbSet<PlayerClassLevelStatsBase> PlayerClassLevelStats { get; set; }
         public DbSet<PlayerCreateInfoBase> PlayerCreateInfos { get; set; }
         public DbSet<PlayerCreateInfoActionBase> PlayerCreateInfoActions { get; set; }
         public DbSet<PlayerCreateInfoItemBase> PlayerCreateInfoItems { get; set; }

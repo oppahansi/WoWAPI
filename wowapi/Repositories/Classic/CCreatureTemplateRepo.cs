@@ -5,6 +5,8 @@ using wowapi.Contracts.Classic;
 using wowapi.Entities;
 using wowapi.Entities.Models.Classic;
 using wowapi.Entities.ModelsPrepared;
+using wowapi.Enumerations;
+using wowapi.Extensions;
 
 namespace wowapi.Repository.Classic
 {
@@ -48,12 +50,26 @@ namespace wowapi.Repository.Classic
 
         #region Npcs
 
-        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList()
+        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList(CCreatureTemplate queryModel, byte filterType)
         {
             var resultList = new List<NpcDetailsBase>();
             var creatureTemplates = await GetAllCreatureTemplatessAsync();
+            IEnumerable<CCreatureTemplate> filtered = new List<CCreatureTemplate>();
 
-            foreach (var creatureTemplate in creatureTemplates)
+            switch (filterType)
+            {
+                case (byte)CommonEnums.FilterTypes.ALL:
+                    filtered = _repositoryContext.FilterAll(creatureTemplates, queryModel);
+                    break;
+                case (byte)CommonEnums.FilterTypes.ANY:
+                    filtered = _repositoryContext.FilterAny(creatureTemplates, queryModel);
+                    break;
+                case (byte)CommonEnums.FilterTypes.INVERTED:
+                    filtered = _repositoryContext.FilterInverted(creatureTemplates, queryModel);
+                    break;
+            }
+
+            foreach (var creatureTemplate in filtered)
                 resultList.Add(new NpcDetailsBase(creatureTemplate));
 
             return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);

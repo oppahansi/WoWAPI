@@ -21,9 +21,8 @@
     <Folder Include="Contracts\" />
     <Folder Include="Contracts\Classic\" />
     <Folder Include="Entities\" />
-    <Folder Include="Entities\Dictionaries\" />
-    <Folder Include="Entities\Enumerations\" />
-    <Folder Include="Entities\Extensions\" />
+    <Folder Include="Dictionaries\" />
+    <Folder Include="Enumerations\" />
     <Folder Include="Entities\ModelsPrepared\" />
     <Folder Include="Entities\Resources\" />
     <Folder Include="Utilities\" />
