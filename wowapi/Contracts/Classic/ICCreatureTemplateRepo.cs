@@ -20,7 +20,7 @@ namespace wowapi.Contracts.Classic
         #region Npcs - Prepared Creature Templates
 
         Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList(CCreatureTemplate queryModel, byte filterType);
-        Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType);
+        Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType, CCreatureTemplate queryModel, byte filterType);
         Task<NpcDetails> GetNpcDetailsByEntryAsync(uint entry);
         Task<NpcDetails> GetNpcDetailsByNameAsync(string name);
 

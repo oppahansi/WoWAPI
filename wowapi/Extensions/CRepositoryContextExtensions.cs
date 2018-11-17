@@ -2,12 +2,29 @@ using System.Collections.Generic;
 using System.Linq;
 using wowapi.Entities;
 using wowapi.Entities.Models.Classic;
+using wowapi.Enumerations;
 
 namespace wowapi.Extensions
 {
     public static class CRepositoryContextExtensions
     {
-        public static IEnumerable<CCreatureTemplate> FilterAll(this CRepositoryContext repositoryContext, IEnumerable<CCreatureTemplate> creatureTemplates, CCreatureTemplate queryModel)
+        public static void Filter(this CRepositoryContext repositoryContext, ref IEnumerable<CCreatureTemplate> creatureTemplates, CCreatureTemplate queryModel, byte filterType)
+        {
+            switch (filterType)
+            {
+                case (byte)CommonEnums.FilterTypes.ALL:
+                    creatureTemplates = FilterAll(ref creatureTemplates, queryModel);
+                    break;
+                case (byte)CommonEnums.FilterTypes.ANY:
+                    creatureTemplates = FilterAny(ref creatureTemplates, queryModel);
+                    break;
+                case (byte)CommonEnums.FilterTypes.INVERTED:
+                    creatureTemplates = FilterInverted(ref creatureTemplates, queryModel);
+                    break;
+            }
+        }
+
+        public static IEnumerable<CCreatureTemplate> FilterAll(ref IEnumerable<CCreatureTemplate> creatureTemplates, CCreatureTemplate queryModel)
         {
             if (!string.IsNullOrEmpty(queryModel.Name))
                 creatureTemplates = creatureTemplates.Where(x => x.Name.ToLower().CompareTo(queryModel.Name.ToLower()) == 0 || x.Name.ToLower().Contains(queryModel.Name.ToLower()));
@@ -36,7 +53,7 @@ namespace wowapi.Extensions
             return creatureTemplates;
         }
 
-        public static IEnumerable<CCreatureTemplate> FilterAny(this CRepositoryContext repositoryContext, IEnumerable<CCreatureTemplate> creatureTemplates, CCreatureTemplate queryModel)
+        public static IEnumerable<CCreatureTemplate> FilterAny(ref IEnumerable<CCreatureTemplate> creatureTemplates, CCreatureTemplate queryModel)
         {
             IEnumerable<CCreatureTemplate> filtered = new List<CCreatureTemplate>();
 
@@ -67,7 +84,7 @@ namespace wowapi.Extensions
             return filtered;
         }
 
-        public static IEnumerable<CCreatureTemplate> FilterInverted(this CRepositoryContext repositoryContext, IEnumerable<CCreatureTemplate> creatureTemplates, CCreatureTemplate queryModel)
+        public static IEnumerable<CCreatureTemplate> FilterInverted(ref IEnumerable<CCreatureTemplate> creatureTemplates, CCreatureTemplate queryModel)
         {
             IEnumerable<CCreatureTemplate> filtered = new List<CCreatureTemplate>();
 

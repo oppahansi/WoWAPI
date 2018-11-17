@@ -54,31 +54,21 @@ namespace wowapi.Repository.Classic
         {
             var resultList = new List<NpcDetailsBase>();
             var creatureTemplates = await GetAllCreatureTemplatessAsync();
-            IEnumerable<CCreatureTemplate> filtered = new List<CCreatureTemplate>();
 
-            switch (filterType)
-            {
-                case (byte)CommonEnums.FilterTypes.ALL:
-                    filtered = _repositoryContext.FilterAll(creatureTemplates, queryModel);
-                    break;
-                case (byte)CommonEnums.FilterTypes.ANY:
-                    filtered = _repositoryContext.FilterAny(creatureTemplates, queryModel);
-                    break;
-                case (byte)CommonEnums.FilterTypes.INVERTED:
-                    filtered = _repositoryContext.FilterInverted(creatureTemplates, queryModel);
-                    break;
-            }
+            _repositoryContext.Filter(ref creatureTemplates, queryModel, filterType);
 
-            foreach (var creatureTemplate in filtered)
+            foreach (var creatureTemplate in creatureTemplates)
                 resultList.Add(new NpcDetailsBase(creatureTemplate));
 
             return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
         }
 
-        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType)
+        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType, CCreatureTemplate queryModel, byte filterType)
         {
             var resultList = new List<NpcDetailsBase>();
             var creatureTemplates = await GetAllCreatureTemplatesByTypeAsync(creatureType);
+
+            _repositoryContext.Filter(ref creatureTemplates, queryModel, filterType);
 
             foreach (var creatureTemplate in creatureTemplates)
                 resultList.Add(new NpcDetailsBase(creatureTemplate));

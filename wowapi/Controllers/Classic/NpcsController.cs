@@ -36,11 +36,11 @@ namespace wowapi.Controllers.Classic
         }
 
         [HttpGet("{type}", Name = "NpcsByType")]
-        public async Task<IActionResult> GetNpcsByType(byte type)
+        public async Task<IActionResult> GetNpcsByType(byte type, [FromQuery] CCreatureTemplate queryModel, [FromQuery] byte filterType = 0)
         {
             try
             {
-                var creatureTemplates = await _repository.CreatureTemplatesRepo.GetNpcsByTypeSearchResultListAsync(type);
+                var creatureTemplates = await _repository.CreatureTemplatesRepo.GetNpcsByTypeSearchResultListAsync(type, queryModel, filterType);
                 return Ok(creatureTemplates.Take(250));
             }
             catch (Exception ex)
