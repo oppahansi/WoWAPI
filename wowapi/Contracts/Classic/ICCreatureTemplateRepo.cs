@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using wowapi.Entities.Models.Classic;
+using wowapi.Entities.Models.Search;
 using wowapi.Entities.ModelsPrepared;
 
 namespace wowapi.Contracts.Classic
@@ -19,8 +20,8 @@ namespace wowapi.Contracts.Classic
 
         #region Npcs - Prepared Creature Templates
 
-        Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList(CCreatureTemplate queryModel, byte filterType);
-        Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType, CCreatureTemplate queryModel, byte filterType);
+        Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList(CreatureFilterParams filterParams);
+        Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType, CreatureFilterParams filterParams);
         Task<NpcDetails> GetNpcDetailsByEntryAsync(uint entry);
         Task<NpcDetails> GetNpcDetailsByNameAsync(string name);
 

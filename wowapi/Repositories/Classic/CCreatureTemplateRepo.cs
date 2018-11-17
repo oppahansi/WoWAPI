@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using wowapi.Contracts.Classic;
 using wowapi.Entities;
 using wowapi.Entities.Models.Classic;
+using wowapi.Entities.Models.Search;
 using wowapi.Entities.ModelsPrepared;
 using wowapi.Enumerations;
 using wowapi.Extensions;
@@ -50,12 +51,13 @@ namespace wowapi.Repository.Classic
 
         #region Npcs
 
-        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList(CCreatureTemplate queryModel, byte filterType)
+        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList(CreatureFilterParams filterParams)
         {
             var resultList = new List<NpcDetailsBase>();
             var creatureTemplates = await GetAllCreatureTemplatessAsync();
-
-            _repositoryContext.Filter(ref creatureTemplates, queryModel, filterType);
+            
+            if (!filterParams.IsEmpty())
+                _repositoryContext.Filter(ref creatureTemplates, filterParams);
 
             foreach (var creatureTemplate in creatureTemplates)
                 resultList.Add(new NpcDetailsBase(creatureTemplate));
@@ -63,12 +65,13 @@ namespace wowapi.Repository.Classic
             return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
         }
 
-        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType, CCreatureTemplate queryModel, byte filterType)
+        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType, CreatureFilterParams filterParams)
         {
             var resultList = new List<NpcDetailsBase>();
             var creatureTemplates = await GetAllCreatureTemplatesByTypeAsync(creatureType);
 
-            _repositoryContext.Filter(ref creatureTemplates, queryModel, filterType);
+            if (!filterParams.IsEmpty())
+                _repositoryContext.Filter(ref creatureTemplates, filterParams);
 
             foreach (var creatureTemplate in creatureTemplates)
                 resultList.Add(new NpcDetailsBase(creatureTemplate));

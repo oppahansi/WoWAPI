@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using wowapi.Contracts;
 using wowapi.Entities.Models.Classic;
+using wowapi.Entities.Models.Search;
 
 namespace wowapi.Controllers.Classic
 {
@@ -20,11 +21,11 @@ namespace wowapi.Controllers.Classic
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetNpcs([FromQuery] CCreatureTemplate queryModel, [FromQuery] byte filterType = 0)
+        public async Task<IActionResult> GetNpcs([FromQuery] CreatureFilterParams filterParams)
         {   
             try
             {
-                var creatureList = await _repository.CreatureTemplatesRepo.GetNpcsSearchResultList(queryModel, filterType);
+                var creatureList = await _repository.CreatureTemplatesRepo.GetNpcsSearchResultList(filterParams);
 
                 return Ok(creatureList.Take(250));
             }
@@ -36,11 +37,11 @@ namespace wowapi.Controllers.Classic
         }
 
         [HttpGet("{type}", Name = "NpcsByType")]
-        public async Task<IActionResult> GetNpcsByType(byte type, [FromQuery] CCreatureTemplate queryModel, [FromQuery] byte filterType = 0)
+        public async Task<IActionResult> GetNpcsByType(byte type, [FromQuery] CreatureFilterParams filterParams)
         {
             try
             {
-                var creatureTemplates = await _repository.CreatureTemplatesRepo.GetNpcsByTypeSearchResultListAsync(type, queryModel, filterType);
+                var creatureTemplates = await _repository.CreatureTemplatesRepo.GetNpcsByTypeSearchResultListAsync(type, filterParams);
                 return Ok(creatureTemplates.Take(250));
             }
             catch (Exception ex)

@@ -1,118 +1,164 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using wowapi.Entities;
 using wowapi.Entities.Models.Classic;
+using wowapi.Entities.Models.Search;
 using wowapi.Enumerations;
 
 namespace wowapi.Extensions
 {
     public static class CRepositoryContextExtensions
     {
-        public static void Filter(this CRepositoryContext repositoryContext, ref IEnumerable<CCreatureTemplate> creatureTemplates, CCreatureTemplate queryModel, byte filterType)
+        public static void Filter(this CRepositoryContext repositoryContext, ref IEnumerable<CCreatureTemplate> creatureTemplates, CreatureFilterParams filterParams)
         {
-            switch (filterType)
+            switch (filterParams.FilterType)
             {
                 case (byte)CommonEnums.FilterTypes.ALL:
-                    creatureTemplates = FilterAll(ref creatureTemplates, queryModel);
+                    FilterAll(ref creatureTemplates, filterParams);
                     break;
                 case (byte)CommonEnums.FilterTypes.ANY:
-                    creatureTemplates = FilterAny(ref creatureTemplates, queryModel);
+                    FilterAny(ref creatureTemplates, filterParams);
                     break;
                 case (byte)CommonEnums.FilterTypes.INVERTED:
-                    creatureTemplates = FilterInverted(ref creatureTemplates, queryModel);
+                    FilterInverted(ref creatureTemplates, filterParams);
                     break;
             }
         }
 
-        public static IEnumerable<CCreatureTemplate> FilterAll(ref IEnumerable<CCreatureTemplate> creatureTemplates, CCreatureTemplate queryModel)
+        private static void FilterAll(ref IEnumerable<CCreatureTemplate> creatureTemplates, CreatureFilterParams filterParams)
         {
-            if (!string.IsNullOrEmpty(queryModel.Name))
-                creatureTemplates = creatureTemplates.Where(x => x.Name.ToLower().CompareTo(queryModel.Name.ToLower()) == 0 || x.Name.ToLower().Contains(queryModel.Name.ToLower()));
+            var filters = new List<Func<CCreatureTemplate, bool>>();
 
-            if (!string.IsNullOrEmpty(queryModel.SubName)) 
-                creatureTemplates = creatureTemplates.Where(x => !string.IsNullOrEmpty(x.SubName)).Where(x => x.SubName.ToLower().CompareTo(queryModel.SubName.ToLower()) == 0 || x.SubName.ToLower().Contains(queryModel.SubName.ToLower()));   
+            if (!string.IsNullOrEmpty(filterParams.Name))
+                filters.Add(x => x.Name.ToLower().CompareTo(filterParams.Name.ToLower()) == 0 || x.Name.ToLower().Contains(filterParams.Name.ToLower()));
 
-            if (queryModel.MinLevel != 0)
-                creatureTemplates = creatureTemplates.Where(x => x.MinLevel == queryModel.MinLevel);
+            if (!string.IsNullOrEmpty(filterParams.SubName)) 
+            {
+                filters.Add(x => 
+                {
+                    if (!string.IsNullOrEmpty(x.SubName))
+                        return x.SubName.ToLower().CompareTo(filterParams.SubName.ToLower()) == 0 || x.SubName.ToLower().Contains(filterParams.SubName.ToLower());
+                    else
+                        return false;
+                });  
+            } 
 
-            if (queryModel.MaxLevel != 0)
-                creatureTemplates = creatureTemplates.Where(x => x.MaxLevel == queryModel.MaxLevel);
+            if (filterParams.MinLevel != 0)
+                filters.Add(x => x.MinLevel == filterParams.MinLevel);
 
-            if (queryModel.Family != 0)
-                creatureTemplates = creatureTemplates.Where(x => x.Family == queryModel.Family);
+            if (filterParams.MaxLevel != 0)
+                filters.Add(x => x.MaxLevel == filterParams.MaxLevel);
 
-            if (queryModel.NpcFlags != 0)
-                creatureTemplates = creatureTemplates.Where(x => (x.NpcFlags & (uint)queryModel.NpcFlags) == (uint)queryModel.NpcFlags);
+            if (filterParams.Family != 0)
+                filters.Add(x => x.Family == filterParams.Family);
 
-            if (queryModel.ExtraFlags != 0)
-                creatureTemplates = creatureTemplates.Where(x => (x.ExtraFlags & (uint)queryModel.ExtraFlags) == (uint)queryModel.ExtraFlags);
+            if (filterParams.NpcFlags != 0)
+                filters.Add(x => (x.NpcFlags & (uint)filterParams.NpcFlags) == (uint)filterParams.NpcFlags);
 
-            if (queryModel.MechanicImmuneMask != 0)
-                creatureTemplates = creatureTemplates.Where(x => (x.MechanicImmuneMask & (uint)queryModel.MechanicImmuneMask) == (uint)queryModel.MechanicImmuneMask);                
+            if (filterParams.ExtraFlags != 0)
+                filters.Add(x => (x.ExtraFlags & (uint)filterParams.ExtraFlags) == (uint)filterParams.ExtraFlags);
 
-            return creatureTemplates;
+            if (filterParams.MechanicImmuneMask != 0)
+                filters.Add(x => (x.MechanicImmuneMask & (uint)filterParams.MechanicImmuneMask) == (uint)filterParams.MechanicImmuneMask);
+            
+            if (filterParams.Civilian != 2)
+                filters.Add(x => x.Civilian == filterParams.Civilian);
+
+            creatureTemplates = creatureTemplates.AsParallel().Where(x =>
+            {
+                return filters.All(f => f(x));
+            });
         }
 
-        public static IEnumerable<CCreatureTemplate> FilterAny(ref IEnumerable<CCreatureTemplate> creatureTemplates, CCreatureTemplate queryModel)
+        private static void FilterAny(ref IEnumerable<CCreatureTemplate> creatureTemplates, CreatureFilterParams filterParams)
         {
-            IEnumerable<CCreatureTemplate> filtered = new List<CCreatureTemplate>();
+            var filters = new List<Func<CCreatureTemplate, bool>>();
 
-            if (!string.IsNullOrEmpty(queryModel.Name))
-                filtered = filtered.Union(creatureTemplates.Where(x => x.Name.ToLower().CompareTo(queryModel.Name.ToLower()) == 0 || x.Name.ToLower().Contains(queryModel.Name.ToLower())));
+            if (!string.IsNullOrEmpty(filterParams.Name))
+                filters.Add(x => x.Name.ToLower().CompareTo(filterParams.Name.ToLower()) == 0 || x.Name.ToLower().Contains(filterParams.Name.ToLower()));
 
-            if (!string.IsNullOrEmpty(queryModel.SubName)) 
-                filtered = filtered.Union(creatureTemplates.Where(x => !string.IsNullOrEmpty(x.SubName)).Where(x => x.SubName.ToLower().CompareTo(queryModel.SubName.ToLower()) == 0 || x.SubName.ToLower().Contains(queryModel.SubName.ToLower())));
+            if (!string.IsNullOrEmpty(filterParams.SubName)) 
+            {
+                filters.Add(x => 
+                {
+                    if (!string.IsNullOrEmpty(x.SubName))
+                        return x.SubName.ToLower().CompareTo(filterParams.SubName.ToLower()) == 0 || x.SubName.ToLower().Contains(filterParams.SubName.ToLower());
+                    else
+                        return false;
+                });  
+            } 
 
-            if (queryModel.MinLevel != 0)
-                filtered = filtered.Union(creatureTemplates.Where(x => x.MinLevel == queryModel.MinLevel));
+            if (filterParams.MinLevel != 0)
+                filters.Add(x => x.MinLevel == filterParams.MinLevel);
 
-            if (queryModel.MaxLevel != 0)
-                filtered = filtered.Union(creatureTemplates.Where(x => x.MaxLevel == queryModel.MaxLevel));
+            if (filterParams.MaxLevel != 0)
+                filters.Add(x => x.MaxLevel == filterParams.MaxLevel);
 
-            if (queryModel.Family != 0)
-                filtered = filtered.Union(creatureTemplates.Where(x => x.Family == queryModel.Family));
+            if (filterParams.Family != 0)
+                filters.Add(x => x.Family == filterParams.Family);
 
-            if (queryModel.NpcFlags != 0)
-                filtered = filtered.Union(creatureTemplates.Where(x => (x.NpcFlags & (uint)queryModel.NpcFlags) == (uint)queryModel.NpcFlags));
+            if (filterParams.NpcFlags != 0)
+                filters.Add(x => (x.NpcFlags & (uint)filterParams.NpcFlags) == (uint)filterParams.NpcFlags);
 
-            if (queryModel.ExtraFlags != 0)
-                filtered = filtered.Union(creatureTemplates.Where(x => (x.ExtraFlags & (uint)queryModel.ExtraFlags) == (uint)queryModel.ExtraFlags));
+            if (filterParams.ExtraFlags != 0)
+                filters.Add(x => (x.ExtraFlags & (uint)filterParams.ExtraFlags) == (uint)filterParams.ExtraFlags);
 
-            if (queryModel.MechanicImmuneMask != 0)
-                filtered = filtered.Union(creatureTemplates.Where(x => (x.MechanicImmuneMask & (uint)queryModel.MechanicImmuneMask) == (uint)queryModel.MechanicImmuneMask));
+            if (filterParams.MechanicImmuneMask != 0)
+                filters.Add(x => (x.MechanicImmuneMask & (uint)filterParams.MechanicImmuneMask) == (uint)filterParams.MechanicImmuneMask);
 
-            return filtered;
+            if (filterParams.Civilian != 2)
+                filters.Add(x => x.Civilian == filterParams.Civilian);
+
+            creatureTemplates = creatureTemplates.AsParallel().Where(x =>
+            {
+                return filters.Any(f => f(x));
+            });
         }
 
-        public static IEnumerable<CCreatureTemplate> FilterInverted(ref IEnumerable<CCreatureTemplate> creatureTemplates, CCreatureTemplate queryModel)
+        private static void FilterInverted(ref IEnumerable<CCreatureTemplate> creatureTemplates, CreatureFilterParams filterParams)
         {
-            IEnumerable<CCreatureTemplate> filtered = new List<CCreatureTemplate>();
+            var filters = new List<Func<CCreatureTemplate, bool>>();
 
-            if (!string.IsNullOrEmpty(queryModel.Name))
-                filtered = filtered.Union(creatureTemplates.Where(x => x.Name.ToLower().CompareTo(queryModel.Name.ToLower()) != 0 || !x.Name.ToLower().Contains(queryModel.Name.ToLower())));
+            if (!string.IsNullOrEmpty(filterParams.Name))
+                filters.Add(x => x.Name.ToLower().CompareTo(filterParams.Name.ToLower()) != 0 || !x.Name.ToLower().Contains(filterParams.Name.ToLower()));
 
-            if (!string.IsNullOrEmpty(queryModel.SubName)) 
-                filtered = filtered.Union(creatureTemplates.Where(x => !string.IsNullOrEmpty(x.SubName)).Where(x => x.SubName.ToLower().CompareTo(queryModel.SubName.ToLower()) != 0 || !x.SubName.ToLower().Contains(queryModel.SubName.ToLower())));
+            if (!string.IsNullOrEmpty(filterParams.SubName)) 
+            {
+                filters.Add(x => 
+                {
+                    if (!string.IsNullOrEmpty(x.SubName))
+                        return x.SubName.ToLower().CompareTo(filterParams.SubName.ToLower()) != 0 || !x.SubName.ToLower().Contains(filterParams.SubName.ToLower());
+                    else
+                        return false;
+                });  
+            } 
 
-            if (queryModel.MinLevel != 0)
-                filtered = filtered.Union(creatureTemplates.Where(x => x.MinLevel != queryModel.MinLevel));
+            if (filterParams.MinLevel != 0)
+                filters.Add(x => x.MinLevel != filterParams.MinLevel);
 
-            if (queryModel.MaxLevel != 0)
-                filtered = filtered.Union(creatureTemplates.Where(x => x.MaxLevel != queryModel.MaxLevel));
+            if (filterParams.MaxLevel != 0)
+                filters.Add(x => x.MaxLevel != filterParams.MaxLevel);
 
-            if (queryModel.Family != 0)
-                filtered = filtered.Union(creatureTemplates.Where(x => x.Family != queryModel.Family));
+            if (filterParams.Family != 0)
+                filters.Add(x => x.Family != filterParams.Family);
 
-            if (queryModel.NpcFlags != 0)
-                filtered = filtered.Union(creatureTemplates.Where(x => (x.NpcFlags & (uint)queryModel.NpcFlags) != (uint)queryModel.NpcFlags));
+            if (filterParams.NpcFlags != 0)
+                filters.Add(x => (x.NpcFlags & (uint)filterParams.NpcFlags) != (uint)filterParams.NpcFlags);
 
-            if (queryModel.ExtraFlags != 0)
-                filtered = filtered.Union(creatureTemplates.Where(x => (x.ExtraFlags & (uint)queryModel.ExtraFlags) != (uint)queryModel.ExtraFlags));
+            if (filterParams.ExtraFlags != 0)
+                filters.Add(x => (x.ExtraFlags & (uint)filterParams.ExtraFlags) != (uint)filterParams.ExtraFlags);
 
-            if (queryModel.MechanicImmuneMask != 0)
-                filtered = filtered.Union(creatureTemplates.Where(x => (x.MechanicImmuneMask & (uint)queryModel.MechanicImmuneMask) != (uint)queryModel.MechanicImmuneMask));
+            if (filterParams.MechanicImmuneMask != 0)
+                filters.Add(x => (x.MechanicImmuneMask & (uint)filterParams.MechanicImmuneMask) != (uint)filterParams.MechanicImmuneMask);
 
-            return filtered;
+            if (filterParams.Civilian != 2)
+                filters.Add(x => x.Civilian != filterParams.Civilian);
+
+            creatureTemplates = creatureTemplates.AsParallel().Where(x =>
+            {
+                return filters.All(f => f(x));
+            });
         }
     }
 }
