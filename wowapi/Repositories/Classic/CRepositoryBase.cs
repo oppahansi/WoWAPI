@@ -1,5 +1,7 @@
 ﻿using Contracts;
+using LazyCache;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,31 +15,49 @@ namespace wowapi.Repository.Classic
     public abstract class CRepositoryBase<T> : IRepositoryBase<T> where T : class
     {
         protected CRepositoryContext RepositoryContext { get; set; }
+        protected readonly IAppCache Cache;
 
-        public CRepositoryBase(CRepositoryContext repositoryContext)
+        public CRepositoryBase(CRepositoryContext repositoryContext, IAppCache cache)
         {
             this.RepositoryContext = repositoryContext;
+            this.Cache = cache;
         }
 
         public async Task<IEnumerable<T>> FindAllAsync()
         {
-            return await this.RepositoryContext.Set<T>().ToListAsync();
+            IEnumerable<T> result = await Cache.GetOrAddAsync(typeof(T).ToString(), async () =>
+            {
+                return await this.RepositoryContext.Set<T>().ToListAsync();
+            }, new TimeSpan(12, 0, 0));             
+        
+            return result;
         }
 
         public async Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression)
         {
-            return await this.RepositoryContext.Set<T>().Where(expression).ToListAsync();
+            IEnumerable<T> result = await Cache.GetOrAddAsync(expression.Type.ToString()+expression.Name+expression.Parameters.ToString(), async () =>
+            {
+                return await this.RepositoryContext.Set<T>().ToListAsync();
+            }, new TimeSpan(12, 0, 0));             
+        
+            return result;
         }
 
-        public async Task<IEnumerable<T>> FindAllByConditionsAsync(List<Func<T, bool>> filters, byte filterType)
+        public async Task<IEnumerable<T>> FindAllByConditionsAsync(List<Func<T, bool>> filters, byte filterType, string cacheFiltersString)
         {
-            switch(filterType)
+            IEnumerable<T> result = await Cache.GetOrAddAsync(cacheFiltersString, async () =>
             {
-                case (byte)CommonEnums.FilterTypes.ANY:
-                    return await this.RepositoryContext.Set<T>().Where(x => filters.Any(f => f(x))).ToListAsync();
-                default:
-                    return await this.RepositoryContext.Set<T>().Where(x => filters.All(f => f(x))).ToListAsync();
-            }
+                switch(filterType)
+                {
+                    case (byte)CommonEnums.FilterTypes.ANY:
+                        return await this.RepositoryContext.Set<T>().Where(x => filters.Any(f => f(x))).ToListAsync();
+                    default:
+                        return await this.RepositoryContext.Set<T>().Where(x => filters.All(f => f(x))).ToListAsync();
+                }
+            }, new TimeSpan(12, 0, 0));             
+        
+            return result;
+            
         }
 
         public void Create(T entity)

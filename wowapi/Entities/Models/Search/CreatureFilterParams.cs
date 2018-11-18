@@ -32,5 +32,18 @@ namespace wowapi.Entities.Models.Search
 
             return builder.ToString();
         }
+
+        public  string ToCacheString()
+        {
+            var properties = this.GetType().GetProperties();
+            var builder = new StringBuilder();
+
+            builder.Append($"[{this.GetType().ToString()}]");
+
+            foreach (var property in properties)
+                builder.Append($"[{property.Name}]:{property.GetValue(this, null)}");
+
+            return builder.ToString();
+        }
     }
 }

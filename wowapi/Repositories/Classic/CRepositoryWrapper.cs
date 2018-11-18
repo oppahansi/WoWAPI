@@ -1,4 +1,5 @@
-﻿using wowapi.Contracts;
+﻿using LazyCache;
+using wowapi.Contracts;
 using wowapi.Contracts.Classic;
 using wowapi.Entities;
 
@@ -7,6 +8,7 @@ namespace wowapi.Repository.Classic
     public class CRepositoryWrapper : IRepositoryWrapper
     {
         private CRepositoryContext _repoContext;
+        private readonly IAppCache _cache;
 
         private ICCreatureTemplateRepo _creatureTemplatesRepo;
         public ICCreatureTemplateRepo CreatureTemplatesRepo
@@ -15,7 +17,7 @@ namespace wowapi.Repository.Classic
             {
                 if (_creatureTemplatesRepo == null)
                 {
-                    _creatureTemplatesRepo = new CCreatureTemplateRepo(_repoContext);
+                    _creatureTemplatesRepo = new CCreatureTemplateRepo(_repoContext, _cache);
                 }
 
                 return _creatureTemplatesRepo;
@@ -29,7 +31,7 @@ namespace wowapi.Repository.Classic
             {
                 if (_creaturesRepo == null)
                 {
-                    _creaturesRepo = new CCreatureRepo(_repoContext);
+                    _creaturesRepo = new CCreatureRepo(_repoContext, _cache);
                 }
 
                 return _creaturesRepo;
@@ -37,9 +39,10 @@ namespace wowapi.Repository.Classic
         }
 
 
-        public CRepositoryWrapper(CRepositoryContext repositoryContext)
+        public CRepositoryWrapper(CRepositoryContext repositoryContext, IAppCache cache)
         {
             _repoContext = repositoryContext;
+            _cache = cache;
         }
     }
 }
