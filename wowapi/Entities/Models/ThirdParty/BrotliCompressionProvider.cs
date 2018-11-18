@@ -1,7 +1,6 @@
+using Microsoft.AspNetCore.ResponseCompression;
 using System.IO;
 using System.IO.Compression;
-using BrotliSharpLib;
-using Microsoft.AspNetCore.ResponseCompression;
 
 namespace wowapi.Entities.Models.ThirdParty
 {

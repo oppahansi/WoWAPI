@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using wowapi.Contracts;
-using wowapi.Entities.Models.Classic;
 using wowapi.Entities.Models.Search;
 
 namespace wowapi.Controllers.Classic

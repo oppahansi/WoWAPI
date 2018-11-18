@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using wowapi.Entities.Models.Classic;
-using wowapi.Entities.Models.Common;
 
 namespace wowapi.Extensions
 {

@@ -1,10 +1,10 @@
-﻿using System.IO.Compression;
-using Logging;
+﻿using Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO.Compression;
 using wowapi.Contracts;
 using wowapi.Entities;
 using wowapi.Repository.Classic;

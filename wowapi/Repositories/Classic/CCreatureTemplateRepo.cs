@@ -1,8 +1,7 @@
-﻿using System;
+﻿using LazyCache;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LazyCache;
 using wowapi.Contracts.Classic;
 using wowapi.Entities;
 using wowapi.Entities.Models.Classic;
