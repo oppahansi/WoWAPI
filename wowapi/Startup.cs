@@ -34,6 +34,11 @@ namespace wowapi
 
             services.AddMvc();
 
+            services.ConfigureGzipCompression();
+
+            services.ConfigureBrotliCompression();
+
+            services.ConfigureBrotliCompressionTLS();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +71,8 @@ namespace wowapi
             app.UseStaticFiles();
 
             app.UseMvc();
+
+            app.UseResponseCompression();
 
         }
     }

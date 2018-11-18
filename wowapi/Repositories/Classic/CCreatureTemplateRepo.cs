@@ -34,7 +34,7 @@ namespace wowapi.Repository.Classic
             else
                 creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType);
                 
-            return creatureTemplates.OrderBy(x => x.Name);
+            return creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder);
         }
 
         public async Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatesByTypeAsync(byte creatureType, CreatureFilterParams filterParams)
@@ -49,7 +49,7 @@ namespace wowapi.Repository.Classic
                 creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType);
             }
 
-            return creatureTemplates.OrderBy(x => x.Name);
+            return creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder);
         }
 
         public async Task<CCreatureTemplate> GetCreatureTemplateByEntryAsync(uint entry)
@@ -78,10 +78,10 @@ namespace wowapi.Repository.Classic
             else
                 creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType);
 
-            foreach (var creatureTemplate in creatureTemplates)
+            foreach (var creatureTemplate in creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder).Take(100))
                 resultList.Add(new NpcDetailsBase(creatureTemplate));
 
-            return resultList.OrderBy(x => x.Name);
+            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
         }
 
         public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType, CreatureFilterParams filterParams)
@@ -97,10 +97,10 @@ namespace wowapi.Repository.Classic
                 creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType);
             }
 
-            foreach (var creatureTemplate in creatureTemplates)
+            foreach (var creatureTemplate in creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder).Take(100))
                 resultList.Add(new NpcDetailsBase(creatureTemplate));
 
-            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList.OrderBy(x => x.Name));
+            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
         }
 
         public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByFamilySearchResultListAsync(sbyte creatureFamily, CreatureFilterParams filterParams)
@@ -113,10 +113,10 @@ namespace wowapi.Repository.Classic
             filterParams.Family = creatureFamily;
             creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType);
 
-            foreach (var creatureTemplate in creatureTemplates)
+            foreach (var creatureTemplate in creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder).Take(100))
                 resultList.Add(new NpcDetailsBase(creatureTemplate));
 
-            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList.OrderBy(x => x.Name));
+            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
         }
 
         public async Task<NpcDetails> GetNpcDetailsByEntryAsync(uint entry)

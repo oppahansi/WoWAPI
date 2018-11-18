@@ -18,8 +18,7 @@ namespace wowapi.Entities.Models.Search
         public uint MechanicImmuneMask { get; set; } = 0;
         public uint SchoolImmuneMask { get; set; } = 0;
         public byte Civilian { get; set; } = 2;
-        // TODO
-        //public string SortOrder { get; set; }
+        public string SortOrder { get; set; } = "name";
 
         public override string ToString()
         {

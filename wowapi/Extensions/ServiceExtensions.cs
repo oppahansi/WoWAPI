@@ -1,5 +1,7 @@
-﻿using Logging;
+﻿using System.IO.Compression;
+using Logging;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,5 +48,27 @@ namespace wowapi.Extensions
         {
             services.AddScoped<IRepositoryWrapper, CRepositoryWrapper>();
         }
+
+        public static void ConfigureGzipCompression(this IServiceCollection services)
+        {
+            services.Configure<GzipCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Fastest;
+            });
+        }
+
+        public static void ConfigureBrotliCompression(this IServiceCollection services) {
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<BrotliCompressionProvider>();
+            });
+        }
+
+        public static void ConfigureBrotliCompressionTLS(this IServiceCollection services) {
+            services.AddResponseCompression(options => {
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.EnableForHttps = true;
+            });
+    }
     }
 }
