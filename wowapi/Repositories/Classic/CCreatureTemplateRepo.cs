@@ -68,7 +68,7 @@ namespace wowapi.Repository.Classic
 
         #region Npcs
 
-        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsSearchResultList(CreatureFilterParams filterParams)
+        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsAsync(CreatureFilterParams filterParams)
         {
             var resultList = new List<NpcDetailsBase>();
             IEnumerable<CCreatureTemplate> creatureTemplates;
@@ -84,7 +84,7 @@ namespace wowapi.Repository.Classic
             return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
         }
 
-        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeSearchResultListAsync(byte creatureType, CreatureFilterParams filterParams)
+        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeAsync(byte creatureType, CreatureFilterParams filterParams)
         {
             var resultList = new List<NpcDetailsBase>();
             IEnumerable<CCreatureTemplate> creatureTemplates;
@@ -103,7 +103,7 @@ namespace wowapi.Repository.Classic
             return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
         }
 
-        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByFamilySearchResultListAsync(sbyte creatureFamily, CreatureFilterParams filterParams)
+        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByFamilytAsync(sbyte creatureFamily, CreatureFilterParams filterParams)
         {
             var resultList = new List<NpcDetailsBase>();
             IEnumerable<CCreatureTemplate> creatureTemplates;

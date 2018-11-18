@@ -24,7 +24,7 @@ namespace wowapi.Controllers.Classic
         {   
             try
             {
-                var npcList = await _repository.CreatureTemplatesRepo.GetNpcsSearchResultList(filterParams);
+                var npcList = await _repository.CreatureTemplatesRepo.GetNpcsAsync(filterParams);
                 _logger.LogInfo($"Returned {npcList.Count()} npc details. {filterParams.ToString()}");
                 return Ok(npcList);
             }
@@ -40,7 +40,7 @@ namespace wowapi.Controllers.Classic
         {
             try
             {
-                var npcList = await _repository.CreatureTemplatesRepo.GetNpcsByTypeSearchResultListAsync(type, filterParams);
+                var npcList = await _repository.CreatureTemplatesRepo.GetNpcsByTypeAsync(type, filterParams);
                 _logger.LogInfo($"Returned {npcList.Count()} npc details by type. {filterParams.ToString()}");
                 return Ok(npcList);
             }
@@ -57,7 +57,7 @@ namespace wowapi.Controllers.Classic
         {
             try
             {
-                var npcList = await _repository.CreatureTemplatesRepo.GetNpcsByFamilySearchResultListAsync(family, filterParams);
+                var npcList = await _repository.CreatureTemplatesRepo.GetNpcsByFamilytAsync(family, filterParams);
                 _logger.LogInfo($"Returned {npcList.Count()} npc details by family. {filterParams.ToString()}");
                 return Ok(npcList);
             }
