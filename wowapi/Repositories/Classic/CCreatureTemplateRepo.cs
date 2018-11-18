@@ -78,7 +78,7 @@ namespace wowapi.Repository.Classic
             else
                 creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType, filterParams.ToCacheString());
 
-            foreach (var creatureTemplate in creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder).Take(100))
+            foreach (var creatureTemplate in PaginatedList<CCreatureTemplate>.Create(creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder), filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize))
                 resultList.Add(new NpcDetailsBase(creatureTemplate));
 
             return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
@@ -97,7 +97,7 @@ namespace wowapi.Repository.Classic
                 creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType, filterParams.ToCacheString());
             }
 
-            foreach (var creatureTemplate in creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder).Take(100))
+            foreach (var creatureTemplate in PaginatedList<CCreatureTemplate>.Create(creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder), filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize))
                 resultList.Add(new NpcDetailsBase(creatureTemplate));
 
             return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
@@ -113,7 +113,7 @@ namespace wowapi.Repository.Classic
             filterParams.Family = creatureFamily;
             creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType, filterParams.ToCacheString());
 
-            foreach (var creatureTemplate in creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder).Take(100))
+            foreach (var creatureTemplate in PaginatedList<CCreatureTemplate>.Create(creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder), filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize))
                 resultList.Add(new NpcDetailsBase(creatureTemplate));
 
             return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);

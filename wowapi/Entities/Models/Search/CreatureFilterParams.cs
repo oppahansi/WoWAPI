@@ -18,6 +18,8 @@ namespace wowapi.Entities.Models.Search
         public uint SchoolImmuneMask { get; set; } = 0;
         public byte Civilian { get; set; } = 2;
         public string SortOrder { get; set; } = "name";
+        public byte Page { get; set; } = 1;
+        public byte PageSize { get; set; } = 100;
 
         public override string ToString()
         {

@@ -1,0 +1,461 @@
+2018-11-18 12:24:22.9166 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+
+2018-11-18 12:24:27.4166 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+
+2018-11-18 12:24:35.8135 INFO Returned 31 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: qiraji
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+
+2018-11-18 12:24:53.0275 INFO Returned 31 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: qiraji
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: maxlevel_desc
+
+2018-11-18 19:49:27.8239 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 1
+[PageSize]: 100
+
+2018-11-18 19:49:27.8902 ERROR Some error in the GetNpcs method: System.InvalidOperationException: The provider for the source IQueryable doesn't implement IAsyncQueryProvider. Only providers that implement IAsyncQueryProvider can be used for Entity Framework asynchronous operations.
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.CountAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at wowapi.Entities.Models.Search.PaginatedList`1.CreateAsync(IQueryable`1 source, Int32 pageIndex, Int32 pageSize) in /Users/oppahansi/Dev/workspace/clang/wowapi/wowapi/Entities/Models/Search/PaginatedList.cs:line 40
+   at wowapi.Controllers.Classic.NpcsController.GetNpcs(CreatureFilterParams filterParams) in /Users/oppahansi/Dev/workspace/clang/wowapi/wowapi/Controllers/Classic/NpcsController.cs:line 31
+2018-11-18 19:57:26.7931 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 1
+[PageSize]: 100
+
+2018-11-18 19:57:26.8490 ERROR Some error in the GetNpcs method: System.InvalidOperationException: The provider for the source IQueryable doesn't implement IAsyncQueryProvider. Only providers that implement IAsyncQueryProvider can be used for Entity Framework asynchronous operations.
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.CountAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at wowapi.Entities.Models.Search.PaginatedList`1.CreateAsync(IQueryable`1 source, Int32 pageIndex, Int32 pageSize) in /Users/oppahansi/Dev/workspace/clang/wowapi/wowapi/Entities/Models/Search/PaginatedList.cs:line 40
+   at wowapi.Controllers.Classic.NpcsController.GetNpcs(CreatureFilterParams filterParams) in /Users/oppahansi/Dev/workspace/clang/wowapi/wowapi/Controllers/Classic/NpcsController.cs:line 31
+2018-11-18 20:05:39.6761 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 1
+[PageSize]: 100
+
+2018-11-18 20:05:42.0044 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 1
+[PageSize]: 100
+
+2018-11-18 20:05:55.3536 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 1
+[PageSize]: 100
+
+2018-11-18 20:06:00.6455 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 1
+[PageSize]: 100
+
+2018-11-18 20:06:03.4898 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 1
+[PageSize]: 100
+
+2018-11-18 20:06:04.5202 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 1
+[PageSize]: 100
+
+2018-11-18 20:06:05.5471 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 1
+[PageSize]: 100
+
+2018-11-18 20:06:06.5456 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 1
+[PageSize]: 100
+
+2018-11-18 20:06:15.8026 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 2
+[PageSize]: 100
+
+2018-11-18 20:11:17.8062 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 2
+[PageSize]: 100
+
+2018-11-18 20:11:23.2919 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 2
+[PageSize]: 100
+
+2018-11-18 20:11:24.7834 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 2
+[PageSize]: 100
+
+2018-11-18 20:16:26.1679 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 1
+[PageSize]: 100
+
+2018-11-18 20:16:40.8004 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 2
+[PageSize]: 100
+
+2018-11-18 20:16:48.9488 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 30
+[PageSize]: 100
+
+2018-11-18 20:16:58.0892 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 35
+[PageSize]: 100
+
+2018-11-18 20:17:09.0388 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 60
+[PageSize]: 100
+
+2018-11-18 20:17:14.9370 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 60
+[PageSize]: 100
+
+2018-11-18 20:17:18.0580 INFO Returned 100 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 60
+[PageSize]: 100
+
+2018-11-18 20:17:35.1191 INFO Returned 5 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 60
+[PageSize]: 5
+
+2018-11-18 20:17:51.2940 INFO Returned 5 npc details. [wowapi.Entities.Models.Search.CreatureFilterParams]
+[FilterType]: 0
+[Name]: 
+[SubName]: 
+[MinLevel]: 0
+[MaxLevel]: 0
+[Family]: 0
+[Type]: 100
+[NpcFlags]: 0
+[ExtraFlags]: 0
+[MechanicImmuneMask]: 0
+[SchoolImmuneMask]: 0
+[Civilian]: 2
+[SortOrder]: name
+[Page]: 60
+[PageSize]: 5
+
