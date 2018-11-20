@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using wowapi.Contracts.Classic;
-using wowapi.Entities;
-using wowapi.Entities.Models.Classic;
-using wowapi.Entities.Models.Search;
-using wowapi.Entities.ModelsPrepared;
+using wowapi.Models.Db.Classic;
+using wowapi.Models.Search;
 using wowapi.Enumerations;
-using wowapi.Extensions;
 using wowapi.Utilities;
+using wowapi.Contexts;
+using wowapi.Models.Details;
+using wowapi.Extensions;
 
 namespace wowapi.Repository.Classic
 {

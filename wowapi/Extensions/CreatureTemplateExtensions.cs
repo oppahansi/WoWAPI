@@ -1,4 +1,4 @@
-﻿using wowapi.Entities.Models.Classic;
+﻿using wowapi.Models.Db.Classic;
 using wowapi.Enumerations;
 
 namespace wowapi.Extensions

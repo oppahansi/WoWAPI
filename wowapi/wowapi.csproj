@@ -4,31 +4,11 @@
     <AspNetCoreHostingModel>inprocess</AspNetCoreHostingModel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Entities\Resources\**" />
-    <Content Remove="Entities\Resources\**" />
-    <EmbeddedResource Remove="Entities\Resources\**" />
-    <None Remove="Entities\Resources\**" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.2" />
     <PackageReference Include="NLog" Version="4.5.11" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.3.0" />
     <PackageReference Include="BrotliSharpLib" Version="0.3.1" />
     <PackageReference Include="LazyCache.AspNetCore" Version="2.0.0-beta03" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="Controllers\Classic\" />
-    <Folder Include="Repositories\" />
-    <Folder Include="Repositories\Classic\" />
-    <Folder Include="Logging\" />
-    <Folder Include="Contracts\" />
-    <Folder Include="Contracts\Classic\" />
-    <Folder Include="Entities\" />
-    <Folder Include="Dictionaries\" />
-    <Folder Include="Enumerations\" />
-    <Folder Include="Entities\ModelsPrepared\" />
-    <Folder Include="Utilities\" />
   </ItemGroup>
 </Project>

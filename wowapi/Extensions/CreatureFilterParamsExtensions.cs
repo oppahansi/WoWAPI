@@ -1,4 +1,4 @@
-using wowapi.Entities.Models.Search;
+using wowapi.Models.Search;
 
 namespace wowapi.Extensions
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using wowapi.Entities.Models.Classic;
+using wowapi.Models.Db.Classic;
 
 namespace wowapi.Contracts.Classic
 {

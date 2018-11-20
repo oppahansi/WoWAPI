@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using wowapi.Contracts;
-using wowapi.Entities.Models.Search;
+using wowapi.Models.Search;
 using wowapi.Extensions;
 
 namespace wowapi.Controllers.Classic

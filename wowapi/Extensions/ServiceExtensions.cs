@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO.Compression;
+using wowapi.Contexts;
 using wowapi.Contracts;
-using wowapi.Entities;
 using wowapi.Repository.Classic;
 
 namespace wowapi.Extensions

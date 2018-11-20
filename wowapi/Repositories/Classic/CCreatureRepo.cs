@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using wowapi.Contexts;
 using wowapi.Contracts.Classic;
-using wowapi.Entities;
-using wowapi.Entities.Models.Classic;
+using wowapi.Models.Db.Classic;
 
 namespace wowapi.Repository.Classic
 {

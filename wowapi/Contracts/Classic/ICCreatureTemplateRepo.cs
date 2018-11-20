@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using wowapi.Entities.Models.Classic;
-using wowapi.Entities.Models.Search;
-using wowapi.Entities.ModelsPrepared;
+using wowapi.Models.Db.Classic;
+using wowapi.Models.Search;
+using wowapi.Models.Details;
 
 namespace wowapi.Contracts.Classic
 {

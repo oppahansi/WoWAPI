@@ -1,4 +1,6 @@
-﻿using wowapi.Entities.ModelsPrepared;
+﻿
+
+using wowapi.Models.Details;
 
 namespace wowapi.Extensions
 {

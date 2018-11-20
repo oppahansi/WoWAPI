@@ -1,7 +1,7 @@
 ﻿using LazyCache;
+using wowapi.Contexts;
 using wowapi.Contracts;
 using wowapi.Contracts.Classic;
-using wowapi.Entities;
 
 namespace wowapi.Repository.Classic
 {

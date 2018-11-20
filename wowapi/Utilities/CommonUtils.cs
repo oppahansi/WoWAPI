@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using wowapi.Entities.Models.Classic;
-using wowapi.Entities.Models.Search;
+using wowapi.Models.Db.Classic;
+using wowapi.Models.Search;
 
 namespace wowapi.Utilities
 {

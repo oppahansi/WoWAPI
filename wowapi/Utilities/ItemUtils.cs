@@ -1,4 +1,4 @@
-using wowapi.Entities.Models.Common;
+using wowapi.Models.Db.Common;
 
 namespace wowapi.Utilities
 {
