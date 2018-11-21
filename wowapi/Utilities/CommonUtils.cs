@@ -96,5 +96,19 @@ namespace wowapi.Utilities
 
             return filters;
         }
+
+        public static List<Func<CItemTemplate, bool>> GetItemFilters(ItemFilterParams filterParams)
+        {
+            var filters = new List<Func<CItemTemplate, bool>>();
+
+            if (filterParams.Class != 100)
+            
+            if (!string.IsNullOrEmpty(filterParams.Name))
+                filters.Add(x => x.Name.ToLower().CompareTo(filterParams.Name.ToLower()) == 0 || x.Name.ToLower().Contains(filterParams.Name.ToLower()));
+
+            
+
+            return filters;
+        }
     }
 }
