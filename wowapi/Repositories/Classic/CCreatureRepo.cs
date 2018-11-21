@@ -17,19 +17,19 @@ namespace wowapi.Repository.Classic
 
         public async Task<CCreature> GetCreaturesByGuidAsync(uint guid)
         {
-            var creature = await FindByConditionAsync(x => x.Guid == guid);
+            var creature = await FindByConditionAsync(x => x.Guid == guid, "creatureGuid" + guid);
             return creature.DefaultIfEmpty(new CCreature()).FirstOrDefault();
         }
 
         public async Task<IEnumerable<CCreature>> GetCreaturesById(uint id)
         {
-            var creatures = await FindByConditionAsync(x => x.Id == id);
+            var creatures = await FindByConditionAsync(x => x.Id == id, "creatureId" + id);
             return creatures.OrderBy(x => x.Guid);
         }
 
         public async Task<IEnumerable<CCreature>> GetCreaturesByMap(ushort map)
         {
-            var creatures = await FindByConditionAsync(x => x.Map == map);
+            var creatures = await FindByConditionAsync(x => x.Map == map, "creatureMap" + map);
             return creatures.OrderBy(x => x.Guid);
         }
     }

@@ -9,7 +9,7 @@ namespace Contracts
     {
         Task<IEnumerable<T>> FindAllAsync();
         Task<IEnumerable<T>> FindAllByConditionsAsync(List<Func<T, bool>> filters, byte filterType, string cacheFiltersString);
-        Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression);
+        Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression, string cacheFiltersString);
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);

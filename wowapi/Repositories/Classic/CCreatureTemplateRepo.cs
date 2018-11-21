@@ -8,7 +8,6 @@ using wowapi.Models.Search;
 using wowapi.Enumerations;
 using wowapi.Utilities;
 using wowapi.Contexts;
-using wowapi.Models.Details;
 using wowapi.Extensions;
 
 namespace wowapi.Repository.Classic
@@ -23,8 +22,6 @@ namespace wowapi.Repository.Classic
             _repositoryContext = repositoryContext;
         }
 
-        #region Creature Templates
-
         public async Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatessAsync(CreatureFilterParams filterParams)
         {
             IEnumerable<CCreatureTemplate> creatureTemplates;
@@ -33,7 +30,7 @@ namespace wowapi.Repository.Classic
                 creatureTemplates = await FindAllAsync();
             else
                 creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType, filterParams.ToCacheString());
-                
+
             return creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder);
         }
 
@@ -42,7 +39,7 @@ namespace wowapi.Repository.Classic
             IEnumerable<CCreatureTemplate> creatureTemplates;
 
             if (filterParams.IsEmpty())
-                creatureTemplates = await FindByConditionAsync(x => x.CreatureType == creatureType);
+                creatureTemplates = await FindByConditionAsync(x => x.CreatureType == creatureType, "creatureTemplateCreatureType" + creatureType);
             else
             {
                 filterParams.Type = creatureType;
@@ -54,83 +51,14 @@ namespace wowapi.Repository.Classic
 
         public async Task<CCreatureTemplate> GetCreatureTemplateByEntryAsync(uint entry)
         {
-            var creatureTemplate = await FindByConditionAsync(x => x.Entry == entry);
+            var creatureTemplate = await FindByConditionAsync(x => x.Entry == entry, "creatureTemplateEntry" + entry);
             return creatureTemplate.DefaultIfEmpty(new CCreatureTemplate()).FirstOrDefault();
         }
 
-        public async Task<CCreatureTemplate> GetCreatureTemplateByNameAsync(string name)
+        public async Task<CCreatureTemplate> GetCreatureTemplateByFiltersAsync(CreatureFilterParams filterParams)
         {
-            var creatureTemplate = await FindByConditionAsync(x => string.Compare(x.Name.ToLower(), name.ToLower(), System.StringComparison.Ordinal) == 0);
+            var creatureTemplate = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType, filterParams.ToCacheString());
             return creatureTemplate.DefaultIfEmpty(new CCreatureTemplate()).FirstOrDefault();
         }
-
-        #endregion
-
-        #region Npcs
-
-        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsAsync(CreatureFilterParams filterParams)
-        {
-            var resultList = new List<NpcDetailsBase>();
-            IEnumerable<CCreatureTemplate> creatureTemplates;
-
-            if (filterParams.IsEmpty())
-                creatureTemplates = await FindAllAsync();
-            else
-                creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType, filterParams.ToCacheString());
-
-            foreach (var creatureTemplate in PaginatedList<CCreatureTemplate>.Create(creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder), filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize))
-                resultList.Add(new NpcDetailsBase(creatureTemplate));
-
-            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
-        }
-
-        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByTypeAsync(byte creatureType, CreatureFilterParams filterParams)
-        {
-            var resultList = new List<NpcDetailsBase>();
-            IEnumerable<CCreatureTemplate> creatureTemplates;
-
-            if (filterParams.IsEmpty())
-                creatureTemplates = await FindByConditionAsync(x => x.CreatureType == creatureType);
-            else
-            {
-                filterParams.Type = creatureType;
-                creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType, filterParams.ToCacheString());
-            }
-
-            foreach (var creatureTemplate in PaginatedList<CCreatureTemplate>.Create(creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder), filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize))
-                resultList.Add(new NpcDetailsBase(creatureTemplate));
-
-            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
-        }
-
-        public async Task<IEnumerable<NpcDetailsBase>> GetNpcsByFamilytAsync(sbyte creatureFamily, CreatureFilterParams filterParams)
-        {
-            var resultList = new List<NpcDetailsBase>();
-            IEnumerable<CCreatureTemplate> creatureTemplates;
-
-            filterParams.FilterType = (byte)CommonEnums.FilterTypes.ALL;
-            filterParams.Type = 1;
-            filterParams.Family = creatureFamily;
-            creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType, filterParams.ToCacheString());
-
-            foreach (var creatureTemplate in PaginatedList<CCreatureTemplate>.Create(creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder), filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize))
-                resultList.Add(new NpcDetailsBase(creatureTemplate));
-
-            return await Task.FromResult<IEnumerable<NpcDetailsBase>>(resultList);
-        }
-
-        public async Task<NpcDetails> GetNpcDetailsByEntryAsync(uint entry)
-        {
-            var searchResult = await FindByConditionAsync(x => x.Entry == entry);
-            return await Task.FromResult(new NpcDetails(searchResult.DefaultIfEmpty(new CCreatureTemplate()).FirstOrDefault()));
-        }
-
-        public async Task<NpcDetails> GetNpcDetailsByFiltersAsync(CreatureFilterParams filterParams)
-        {
-            var searchResult = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType, filterParams.ToCacheString());
-            return await Task.FromResult(new NpcDetails(searchResult.DefaultIfEmpty(new CCreatureTemplate()).FirstOrDefault()));
-        }
-
-        #endregion
     }
 }

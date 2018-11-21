@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using wowapi.Dictionaries;
 using wowapi.Enumerations;
+using wowapi.Models.Db.Classic;
 
 namespace wowapi.Utilities
 {
@@ -46,6 +47,38 @@ namespace wowapi.Utilities
             }
 
             return spellMechanicsList;
-        }     
+        }
+
+        public static object GetNpcDetailsResponseObject(CCreatureTemplate creatureTemplate)
+        {
+            return new 
+                {
+                    Id = creatureTemplate.Entry,
+                    Name = creatureTemplate.Name,
+                    SubName = creatureTemplate.SubName,
+                    MinLevel = creatureTemplate.MinLevel,
+                    MaxLevel = creatureTemplate.MaxLevel,
+                    CreatureType = creatureTemplate.CreatureType,
+                    Rank = creatureTemplate.Rank,
+                    Ainame = creatureTemplate.Ainame,
+                    ScriptName = creatureTemplate.ScriptName,
+                    MinLootGold = creatureTemplate.MinLootGold,
+                    MaxLootGold = creatureTemplate.MaxLootGold,
+                    LootId = creatureTemplate.LootId,
+                    PickpocketLootId = creatureTemplate.PickpocketLootId,
+                    SkinningLootId = creatureTemplate.SkinningLootId,
+                    VendorTemplateId = creatureTemplate.VendorTemplateId,
+                    NpcFlags = creatureTemplate.NpcFlags,
+                    ExtraFlags = creatureTemplate.ExtraFlags,
+                    MechanicImmunities = creatureTemplate.MechanicImmuneMask,
+                    SchoolImmunities = creatureTemplate.SchoolImmuneMask,
+                    ResistanceHoly = creatureTemplate.ResistanceHoly,
+                    ResistanceFire = creatureTemplate.ResistanceFire,
+                    ResistanceNature = creatureTemplate.ResistanceNature,
+                    ResistanceFrost = creatureTemplate.ResistanceFrost,
+                    ResistanceShadow = creatureTemplate.ResistanceShadow,
+                    ResistanceArcane = creatureTemplate.ResistanceArcane
+                };
+        }
     }
 }

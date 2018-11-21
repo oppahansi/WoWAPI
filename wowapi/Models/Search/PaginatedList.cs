@@ -10,11 +10,13 @@ namespace wowapi.Models.Search
     {
         public int PageIndex { get; private set; }
         public int TotalPages { get; private set; }
+        public int PageSize { get; private set; }
 
         public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;
-            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+            PageSize = pageSize;
+            TotalPages = (int)Math.Ceiling(count / (double)PageSize);
 
             this.AddRange(items);
         }
@@ -35,11 +37,11 @@ namespace wowapi.Models.Search
             }
         }
 
-        public static PaginatedList<T> Create(IEnumerable<T> source, int pageIndex, int pageSize)
+        public static async Task<PaginatedList<T>> Create(IEnumerable<T> source, int pageIndex, int pageSize)
         {
             var count = source.Count();
             var items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
-            return new PaginatedList<T>(items, count, pageIndex, pageSize);
+            return await Task.FromResult(new PaginatedList<T>(items, count, pageIndex, pageSize));
         }
     }
 }

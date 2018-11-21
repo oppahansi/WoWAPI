@@ -32,9 +32,9 @@ namespace wowapi.Repository.Classic
             return result;
         }
 
-        public async Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression)
+        public async Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression, string cacheFiltersString)
         {
-            IEnumerable<T> result = await Cache.GetOrAddAsync(expression.Type.ToString()+expression.Name+expression.Parameters.ToString(), async () =>
+            IEnumerable<T> result = await Cache.GetOrAddAsync(cacheFiltersString, async () =>
             {
                 return await this.RepositoryContext.Set<T>().ToListAsync();
             }, new TimeSpan(12, 0, 0));             

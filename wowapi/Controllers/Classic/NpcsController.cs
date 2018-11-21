@@ -1,8 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using wowapi.Contracts;
+using wowapi.Extensions;
+using wowapi.Models.Db.Classic;
 using wowapi.Models.Search;
 
 namespace wowapi.Controllers.Classic
@@ -24,9 +29,30 @@ namespace wowapi.Controllers.Classic
         {   
             try
             {
-                var npcList = await _repository.CreatureTemplatesRepo.GetNpcsAsync(filterParams);
-                _logger.LogInfo($"Returned {npcList.Count()} npc details. {filterParams.ToString()}");
-                return Ok(npcList);
+                var creatureList = await _repository.CreatureTemplatesRepo.GetAllCreatureTemplatessAsync(filterParams);
+                var paginatedCreatureList = await PaginatedList<CCreatureTemplate>.Create(creatureList, filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize);
+                
+                var returnObject = new
+                {
+                    category = "npcps",
+                    page = paginatedCreatureList.PageIndex,
+                    totalPages = paginatedCreatureList.TotalPages,
+                    pageSize = paginatedCreatureList.PageSize,
+                    items = paginatedCreatureList.Select(x => new
+                    {
+                        Id = x.Entry,
+                        Name = x.Name,
+                        SubName = x.SubName,
+                        MinLevel = x.MinLevel,
+                        MaxLevel = x.MaxLevel,
+                        CreatureType = x.CreatureType,
+                        Rank = x.Rank
+                    })
+                };
+
+                _logger.LogInfo($"Returned npc details. {filterParams.ToString()}");
+
+                return Ok(returnObject);
             }
             catch (Exception ex)
             {
@@ -40,30 +66,34 @@ namespace wowapi.Controllers.Classic
         {
             try
             {
-                var npcList = await _repository.CreatureTemplatesRepo.GetNpcsByTypeAsync(type, filterParams);
-                _logger.LogInfo($"Returned {npcList.Count()} npc details by type. {filterParams.ToString()}");
-                return Ok(npcList);
+                var creatureList = await _repository.CreatureTemplatesRepo.GetAllCreatureTemplatesByTypeAsync(type, filterParams);                
+                var paginatedCreatureList = await PaginatedList<CCreatureTemplate>.Create(creatureList, filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize);
+
+                var returnObject = new
+                {
+                    category = "npcps",
+                    page = paginatedCreatureList.PageIndex,
+                    totalPages = paginatedCreatureList.TotalPages,
+                    pageSize = paginatedCreatureList.PageSize,
+                    items = paginatedCreatureList.Select(x => new
+                    {
+                        Id = x.Entry,
+                        Name = x.Name,
+                        SubName = x.SubName,
+                        MinLevel = x.MinLevel,
+                        MaxLevel = x.MaxLevel,
+                        CreatureType = x.CreatureType,
+                        Rank = x.Rank
+                    })
+                };
+                
+                _logger.LogInfo($"Returned npc details by type. {filterParams.ToString()}");
+                
+                return Ok(returnObject);
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside GetNpcsByType action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
-        }
-
-        
-        [HttpGet("1/{family}", Name = "NpcsByFamily")]
-        public async Task<IActionResult> GetNpcsByFamily(sbyte family, [FromQuery] CreatureFilterParams filterParams)
-        {
-            try
-            {
-                var npcList = await _repository.CreatureTemplatesRepo.GetNpcsByFamilytAsync(family, filterParams);
-                _logger.LogInfo($"Returned {npcList.Count()} npc details by family. {filterParams.ToString()}");
-                return Ok(npcList);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong inside GetNpcsByFamily action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }
