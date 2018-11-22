@@ -43,13 +43,13 @@ namespace wowapi.Controllers.Classic
                     items = paginatedList.CreateResultObject()
                 };
 
-                _logger.LogInfo($"Returned npc details. {filterParams.ToString()}");
+                _logger.LogInfo($"Returned itemsets. {filterParams.ToString()}");
 
                 return Ok(responseObject);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Some error in the GetNpcs method: {ex}");
+                _logger.LogError($"Some error in the GetItemSetsAsync method: {ex}");
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -63,17 +63,17 @@ namespace wowapi.Controllers.Classic
 
                 if (itemSet.IsEmptyObject())
                 {
-                    _logger.LogError($"Npc details with entry: {id}, hasn't been found in db.");
+                    _logger.LogError($"Item set with id: {id}, hasn't been found in db.");
                     return NotFound();
                 }
 
-                _logger.LogInfo($"Returned npc details with entry: {id}");
+                _logger.LogInfo($"Returned item set with id: {id}");
                 
                 return Ok(itemSet.CreateResponeObject());
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Some error in the GetNpc method: {ex}");
+                _logger.LogError($"Some error in the GetItemSetAsync method: {ex}");
                 return StatusCode(500, "Internal server error");
             }
         }
