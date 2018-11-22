@@ -8,7 +8,7 @@ using wowapi.Models.Db.Classic;
 
 namespace wowapi.Repository.Classic
 {
-    public class CCreatureRepo : CRepositoryBase<CCreature>, ICCreatuteRepo
+    public class CCreatureRepo : RepositoryBase<CCreature>, ICCreatuteRepo
     {
         public CCreatureRepo(CRepositoryContext repositoryContext, IAppCache cache)
             : base(repositoryContext, cache)

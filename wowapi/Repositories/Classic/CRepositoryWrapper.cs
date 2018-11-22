@@ -2,11 +2,12 @@
 using wowapi.Contexts;
 using wowapi.Contracts;
 using wowapi.Contracts.Classic;
+using wowapi.Contracts.Dbc;
 using wowapi.Repositories.Classic;
 
 namespace wowapi.Repository.Classic
 {
-    public class CRepositoryWrapper : IRepositoryWrapper
+    public class CRepositoryWrapper : ICRepositoryWrapper
     {
         private CRepositoryContext _repoContext;
         private readonly IAppCache _cache;
@@ -52,7 +53,6 @@ namespace wowapi.Repository.Classic
                 return _itemTemplateRepo;
             }
         }
-
 
         public CRepositoryWrapper(CRepositoryContext repositoryContext, IAppCache cache)
         {

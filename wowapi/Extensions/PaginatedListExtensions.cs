@@ -1,6 +1,7 @@
 using System.Linq;
 using wowapi.Enumerations;
 using wowapi.Models.Db.Classic;
+using wowapi.Models.Db.Dbc;
 using wowapi.Models.Search;
 
 namespace wowapi.Extensions
@@ -87,6 +88,15 @@ namespace wowapi.Extensions
                         ItemLevel = x.ItemLevel
                     });
             }
+        }
+
+        public static object CreateResultObject(this PaginatedList<CItemSet> paginatedList)
+        {
+            return paginatedList.Select(x => new
+            {
+                Id = x.Id,
+                Name = x.Name,
+            });
         }
     }
 }

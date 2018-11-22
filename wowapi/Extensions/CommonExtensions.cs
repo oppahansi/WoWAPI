@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using wowapi.Models.Db.Classic;
 using wowapi.Models.Db.Common;
+using wowapi.Models.Db.Dbc;
 using wowapi.Models.Search;
 
 namespace wowapi.Extensions
@@ -78,7 +79,13 @@ namespace wowapi.Extensions
             itemFilterParams.FoodType == 0 &&
             itemFilterParams.MoneyLoot == 0 &&
             itemFilterParams.Duration == 0;
+        }
 
+        public static bool IsEmpty(this ItemSetFilterParams itemSetFilterParams)
+        {
+            return 
+            string.IsNullOrEmpty(itemSetFilterParams.Name) &&
+            itemSetFilterParams.ItemEntry == 0;
         }
 
         public static IEnumerable<CCreatureTemplate> OrderCreatureTemplates(this IEnumerable<CCreatureTemplate> qry, string sortOrder)
@@ -326,6 +333,57 @@ namespace wowapi.Extensions
                     return qry.OrderByDescending(x => x.MaxMoneyLoot);
                 case "duration_desc":
                     return qry.OrderByDescending(x => x.Duration);
+                default:
+                    return qry.OrderBy(x => x.Name);
+            }
+        }
+
+        public static IEnumerable<CItemSet> OrderItemSets(this IEnumerable<CItemSet> qry, string sortOrder)
+        {
+            switch (sortOrder.ToLower())
+            {
+                case "item1":
+                    return qry.OrderBy(x => x.Item1);
+                case "item2":
+                    return qry.OrderBy(x => x.Item2);
+                case "item3":
+                    return qry.OrderBy(x => x.Item3);
+                case "item4":
+                    return qry.OrderBy(x => x.Item4);
+                case "item5":
+                    return qry.OrderBy(x => x.Item5);
+                case "item6":
+                    return qry.OrderBy(x => x.Item6);
+                case "item7":
+                    return qry.OrderBy(x => x.Item7);
+                case "item8":
+                    return qry.OrderBy(x => x.Item8);
+                case "item9":
+                    return qry.OrderBy(x => x.Item9);
+                case "item10":
+                    return qry.OrderBy(x => x.Item10);
+                case "item1_desc":
+                    return qry.OrderByDescending(x => x.Item1);
+                case "item2_desc":
+                    return qry.OrderByDescending(x => x.Item2);
+                case "item3_desc":
+                    return qry.OrderByDescending(x => x.Item3);
+                case "item4_desc":
+                    return qry.OrderByDescending(x => x.Item4);
+                case "item5_desc":
+                    return qry.OrderByDescending(x => x.Item5);
+                case "item6_desc":
+                    return qry.OrderByDescending(x => x.Item6);
+                case "item7_desc":
+                    return qry.OrderByDescending(x => x.Item7);
+                case "item8_desc":
+                    return qry.OrderByDescending(x => x.Item8);
+                case "item9_desc":
+                    return qry.OrderByDescending(x => x.Item9);
+                case "item10_desc":
+                    return qry.OrderByDescending(x => x.Item10);
+                case "name_desc":
+                    return qry.OrderByDescending(x => x.Name);
                 default:
                     return qry.OrderBy(x => x.Name);
             }
@@ -606,6 +664,34 @@ namespace wowapi.Extensions
 
             if (filterParams.Duration != 0)
                 filters.Add(x => x.Duration == filterParams.Duration);
+
+            return filters;
+        }
+
+        public static List<Func<CItemSet, bool>> AsFilters(this ItemSetFilterParams filterParams)
+        {
+            var filters = new List<Func<CItemSet, bool>>();
+
+            if (!string.IsNullOrEmpty(filterParams.Name))
+                filters.Add(x => x.Name.ToLower().CompareTo(filterParams.Name.ToLower()) == 0 || x.Name.ToLower().Contains(filterParams.Name.ToLower()));
+
+            if (filterParams.ItemEntry != 0)
+            {
+                filters.Add(x =>
+                {
+                    return
+                        x.Item1 == filterParams.ItemEntry ||
+                        x.Item2 == filterParams.ItemEntry ||
+                        x.Item3 == filterParams.ItemEntry ||
+                        x.Item4 == filterParams.ItemEntry ||
+                        x.Item5 == filterParams.ItemEntry ||
+                        x.Item6 == filterParams.ItemEntry ||
+                        x.Item7 == filterParams.ItemEntry ||
+                        x.Item8 == filterParams.ItemEntry ||
+                        x.Item9 == filterParams.ItemEntry ||
+                        x.Item10 == filterParams.ItemEntry;
+                });
+            }
 
             return filters;
         }

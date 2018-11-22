@@ -5,7 +5,7 @@ namespace wowapi.Contexts
 {
     public class CRepositoryContext : DbContext
     {
-        public CRepositoryContext(DbContextOptions options)
+        public CRepositoryContext(DbContextOptions<CRepositoryContext> options)
             : base(options)
         {
         }

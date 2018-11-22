@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System.IO.Compression;
 using wowapi.Contexts;
 using wowapi.Contracts;
+using wowapi.Contracts.Classic;
+using wowapi.Contracts.Dbc;
 using wowapi.Repository.Classic;
 
 namespace wowapi.Extensions
@@ -40,13 +42,17 @@ namespace wowapi.Extensions
 
         public static void ConfigureMySqlContext(this IServiceCollection services, IConfiguration config)
         {
-            var connectionString = config["mysqlconnection:connectionStringClassic"];
-            services.AddDbContext<CRepositoryContext>(o => o.UseMySql(connectionString));
+            var connectionStringClassic = config["mysqlconnection:connectionStringClassic"];
+            var connectionStringDbc = config["mysqlconnection:connectionStringDbc"];
+            services.AddDbContext<CRepositoryContext>(o => o.UseMySql(connectionStringClassic));
+            services.AddDbContext<DbcRepositoryContext>(o => o.UseMySql(connectionStringDbc));
+
         }
 
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
-            services.AddScoped<IRepositoryWrapper, CRepositoryWrapper>();
+            services.AddScoped<ICRepositoryWrapper, CRepositoryWrapper>();
+            services.AddScoped<IDbcRepositoryWrapper, DbcRepositoryWrapper>();
         }
 
         public static void ConfigureGzipCompression(this IServiceCollection services)

@@ -1,8 +1,9 @@
 ﻿using wowapi.Contracts.Classic;
+using wowapi.Contracts.Dbc;
 
-namespace wowapi.Contracts
+namespace wowapi.Contracts.Classic
 {
-    public interface IRepositoryWrapper
+    public interface ICRepositoryWrapper
     {
         ICCreatureTemplateRepo CreatureTemplatesRepo { get; }
         ICCreatuteRepo CreaturesRepo { get; }

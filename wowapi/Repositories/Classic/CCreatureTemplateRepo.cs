@@ -10,14 +10,11 @@ using wowapi.Models.Search;
 
 namespace wowapi.Repository.Classic
 {
-    public class CCreatureTemplateRepo : CRepositoryBase<CCreatureTemplate>, ICCreatureTemplateRepo
-    {
-        private CRepositoryContext _repositoryContext;
-
+    public class CCreatureTemplateRepo : RepositoryBase<CCreatureTemplate>, ICCreatureTemplateRepo
+    {    
         public CCreatureTemplateRepo(CRepositoryContext repositoryContext, IAppCache cache)
             : base(repositoryContext, cache)
         {
-            _repositoryContext = repositoryContext;
         }
 
         public async Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatesAsync(CreatureFilterParams filterParams)

@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using wowapi.Contracts;
+using wowapi.Contracts.Classic;
 using wowapi.Extensions;
 using wowapi.Models.Db.Classic;
 using wowapi.Models.Search;
@@ -12,9 +13,9 @@ namespace wowapi.Controllers.Classic
     public class ItemsController : ControllerBase
     {
         private ILoggerManager _logger;
-        private IRepositoryWrapper _repository;
+        private ICRepositoryWrapper _repository;
 
-        public ItemsController(ILoggerManager logger, IRepositoryWrapper repository)
+        public ItemsController(ILoggerManager logger, ICRepositoryWrapper repository)
         {
             _logger = logger;
             _repository = repository;

@@ -7,18 +7,15 @@ using wowapi.Contracts.Classic;
 using wowapi.Extensions;
 using wowapi.Models.Db.Classic;
 using wowapi.Models.Search;
-using wowapi.Repository.Classic;
+using wowapi.Repository;
 
 namespace wowapi.Repositories.Classic
 {
-    public class CItemTemplateRepo : CRepositoryBase<CItemTemplate>, ICItemTemplateRepo
+    public class CItemTemplateRepo : RepositoryBase<CItemTemplate>, ICItemTemplateRepo
     {
-         private CRepositoryContext _repositoryContext;
-
         public CItemTemplateRepo(CRepositoryContext repositoryContext, IAppCache cache)
             : base(repositoryContext, cache)
         {
-            _repositoryContext = repositoryContext;
         }
 
         public async Task<IEnumerable<CItemTemplate>> GetAllItemTemplatesAsync(ItemFilterParams filterParams)
