@@ -1,5 +1,5 @@
-﻿using wowapi.Models.Db.Classic;
-using wowapi.Enumerations;
+﻿using wowapi.Enumerations;
+using wowapi.Models.Db.Classic;
 
 namespace wowapi.Extensions
 {

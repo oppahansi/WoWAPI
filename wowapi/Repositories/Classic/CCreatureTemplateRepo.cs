@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using wowapi.Contexts;
 using wowapi.Contracts.Classic;
+using wowapi.Extensions;
 using wowapi.Models.Db.Classic;
 using wowapi.Models.Search;
-using wowapi.Enumerations;
-using wowapi.Utilities;
-using wowapi.Contexts;
-using wowapi.Extensions;
 
 namespace wowapi.Repository.Classic
 {

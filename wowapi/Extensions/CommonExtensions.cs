@@ -4,7 +4,6 @@ using System.Linq;
 using wowapi.Models.Db.Classic;
 using wowapi.Models.Db.Common;
 using wowapi.Models.Search;
-using wowapi.Utilities;
 
 namespace wowapi.Extensions
 {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using wowapi.Models.Db.Classic;
-using wowapi.Models.Search;
 
 namespace wowapi.Utilities
 {
