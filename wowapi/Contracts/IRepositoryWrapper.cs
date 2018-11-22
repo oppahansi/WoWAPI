@@ -6,5 +6,6 @@ namespace wowapi.Contracts
     {
         ICCreatureTemplateRepo CreatureTemplatesRepo { get; }
         ICCreatuteRepo CreaturesRepo { get; }
+        ICItemTemplateRepo ItemTemplateRepo { get; }
     }
 }

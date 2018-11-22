@@ -36,7 +36,7 @@ namespace wowapi.Repository.Classic
         {
             IEnumerable<T> result = await Cache.GetOrAddAsync(cacheFiltersString, async () =>
             {
-                return await this.RepositoryContext.Set<T>().ToListAsync();
+                return await this.RepositoryContext.Set<T>().Where(expression).ToListAsync();
             }, new TimeSpan(12, 0, 0));             
         
             return result;

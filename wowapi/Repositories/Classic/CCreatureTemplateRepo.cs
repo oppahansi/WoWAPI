@@ -22,31 +22,16 @@ namespace wowapi.Repository.Classic
             _repositoryContext = repositoryContext;
         }
 
-        public async Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatessAsync(CreatureFilterParams filterParams)
+        public async Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatesAsync(CreatureFilterParams filterParams)
         {
             IEnumerable<CCreatureTemplate> creatureTemplates;
 
             if (filterParams.IsEmpty())
                 creatureTemplates = await FindAllAsync();
             else
-                creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType, filterParams.ToCacheString());
+                creatureTemplates = await FindAllByConditionsAsync(filterParams.AsFilters(), filterParams.FilterType, filterParams.ToCacheString());
 
-            return creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder);
-        }
-
-        public async Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatesByTypeAsync(byte creatureType, CreatureFilterParams filterParams)
-        {
-            IEnumerable<CCreatureTemplate> creatureTemplates;
-
-            if (filterParams.IsEmpty())
-                creatureTemplates = await FindByConditionAsync(x => x.CreatureType == creatureType, "creatureTemplateCreatureType" + creatureType);
-            else
-            {
-                filterParams.Type = creatureType;
-                creatureTemplates = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType, filterParams.ToCacheString());
-            }
-
-            return creatureTemplates.OrderCCreatureTemplates(filterParams.SortOrder);
+            return creatureTemplates.OrderCreatureTemplates(filterParams.SortOrder);
         }
 
         public async Task<CCreatureTemplate> GetCreatureTemplateByEntryAsync(uint entry)
@@ -57,7 +42,7 @@ namespace wowapi.Repository.Classic
 
         public async Task<CCreatureTemplate> GetCreatureTemplateByFiltersAsync(CreatureFilterParams filterParams)
         {
-            var creatureTemplate = await FindAllByConditionsAsync(CommonUtils.GetCreatureFilters(filterParams), filterParams.FilterType, filterParams.ToCacheString());
+            var creatureTemplate = await FindAllByConditionsAsync(filterParams.AsFilters(), filterParams.FilterType, filterParams.ToCacheString());
             return creatureTemplate.DefaultIfEmpty(new CCreatureTemplate()).FirstOrDefault();
         }
     }

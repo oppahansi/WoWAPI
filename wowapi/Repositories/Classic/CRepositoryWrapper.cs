@@ -2,6 +2,7 @@
 using wowapi.Contexts;
 using wowapi.Contracts;
 using wowapi.Contracts.Classic;
+using wowapi.Repositories.Classic;
 
 namespace wowapi.Repository.Classic
 {
@@ -35,6 +36,20 @@ namespace wowapi.Repository.Classic
                 }
 
                 return _creaturesRepo;
+            }
+        }
+
+        private ICItemTemplateRepo _itemTemplateRepo;
+        public ICItemTemplateRepo ItemTemplateRepo
+        {
+            get
+            {
+                if (_itemTemplateRepo == null)
+                {
+                    _itemTemplateRepo = new CItemTemplateRepo(_repoContext, _cache);
+                }
+
+                return _itemTemplateRepo;
             }
         }
 

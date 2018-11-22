@@ -25,34 +25,25 @@ namespace wowapi.Controllers.Classic
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetNpcs([FromQuery] CreatureFilterParams filterParams)
+        public async Task<IActionResult> GetNpcsAsync([FromQuery] CreatureFilterParams filterParams)
         {   
             try
             {
-                var creatureList = await _repository.CreatureTemplatesRepo.GetAllCreatureTemplatessAsync(filterParams);
+                var creatureList = await _repository.CreatureTemplatesRepo.GetAllCreatureTemplatesAsync(filterParams);
                 var paginatedCreatureList = await PaginatedList<CCreatureTemplate>.Create(creatureList, filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize);
                 
-                var returnObject = new
+                var responseObject = new
                 {
                     category = "npcps",
                     page = paginatedCreatureList.PageIndex,
                     totalPages = paginatedCreatureList.TotalPages,
                     pageSize = paginatedCreatureList.PageSize,
-                    items = paginatedCreatureList.Select(x => new
-                    {
-                        Id = x.Entry,
-                        Name = x.Name,
-                        SubName = x.SubName,
-                        MinLevel = x.MinLevel,
-                        MaxLevel = x.MaxLevel,
-                        CreatureType = x.CreatureType,
-                        Rank = x.Rank
-                    })
+                    items = paginatedCreatureList.CreateResultObject()
                 };
 
                 _logger.LogInfo($"Returned npc details. {filterParams.ToString()}");
 
-                return Ok(returnObject);
+                return Ok(responseObject);
             }
             catch (Exception ex)
             {
@@ -61,39 +52,26 @@ namespace wowapi.Controllers.Classic
             }
         }
 
-        [HttpGet("{type}", Name = "NpcsByType")]
-        public async Task<IActionResult> GetNpcsByType(byte type, [FromQuery] CreatureFilterParams filterParams)
+        [HttpGet("{entry}", Name = "GetNpc")]
+        public async Task<IActionResult> GetNpcAsync(uint entry)
         {
             try
             {
-                var creatureList = await _repository.CreatureTemplatesRepo.GetAllCreatureTemplatesByTypeAsync(type, filterParams);                
-                var paginatedCreatureList = await PaginatedList<CCreatureTemplate>.Create(creatureList, filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize);
+                var creatureTemplate = await _repository.CreatureTemplatesRepo.GetCreatureTemplateByEntryAsync(entry);
 
-                var returnObject = new
+                if (creatureTemplate.IsEmptyObject())
                 {
-                    category = "npcps",
-                    page = paginatedCreatureList.PageIndex,
-                    totalPages = paginatedCreatureList.TotalPages,
-                    pageSize = paginatedCreatureList.PageSize,
-                    items = paginatedCreatureList.Select(x => new
-                    {
-                        Id = x.Entry,
-                        Name = x.Name,
-                        SubName = x.SubName,
-                        MinLevel = x.MinLevel,
-                        MaxLevel = x.MaxLevel,
-                        CreatureType = x.CreatureType,
-                        Rank = x.Rank
-                    })
-                };
+                    _logger.LogError($"Npc details with entry: {entry}, hasn't been found in db.");
+                    return NotFound();
+                }
+
+                _logger.LogInfo($"Returned npc details with entry: {entry}");
                 
-                _logger.LogInfo($"Returned npc details by type. {filterParams.ToString()}");
-                
-                return Ok(returnObject);
+                return Ok(creatureTemplate.CreateResponeObject());
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside GetNpcsByType action: {ex.Message}");
+                _logger.LogError($"Some error in the GetNpc method: {ex}");
                 return StatusCode(500, "Internal server error");
             }
         }
