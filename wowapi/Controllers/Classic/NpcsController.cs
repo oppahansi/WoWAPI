@@ -27,7 +27,7 @@ namespace wowapi.Controllers.Classic
             try
             {
                 var creatureList = await _repository.CreatureTemplatesRepo.GetAllCreatureTemplatesAsync(filterParams);
-                var paginatedCreatureList = await PaginatedList<CCreatureTemplate>.Create(creatureList, filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize);
+                var paginatedCreatureList = await PaginatedList<CCreatureTemplate>.CreateAsync(creatureList, filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize);
                 
                 var responseObject = new
                 {

@@ -36,7 +36,7 @@ namespace wowapi.Models.Search
             }
         }
 
-        public static async Task<PaginatedList<T>> Create(IEnumerable<T> source, int pageIndex, int pageSize)
+        public static async Task<PaginatedList<T>> CreateAsync(IEnumerable<T> source, int pageIndex, int pageSize)
         {
             var count = source.Count();
             var items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();

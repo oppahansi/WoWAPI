@@ -23,7 +23,7 @@ namespace wowapi.Models.Search
             return builder.ToString();
         }
 
-        public  string ToCacheString()
+        public virtual string ToCacheString()
         {
             var properties = this.GetType().GetProperties();
             var builder = new StringBuilder();

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using wowapi.Models.Db.Dbc;
 
 namespace wowapi.Extensions
@@ -12,6 +13,43 @@ namespace wowapi.Extensions
         public static bool IsEmptyObject(this CItemSet itemSet)
         {
             return itemSet.Id == 0;
+        }
+
+        public static IEnumerable<uint> GetItemEntries(this CItemSet itemSet)
+        {
+            List<uint> entries = new List<uint>();
+
+            if (itemSet.Item1 != 0)
+                entries.Add((uint)itemSet.Item1);
+            
+            if (itemSet.Item2 != 0)
+                entries.Add((uint)itemSet.Item2);
+            
+            if (itemSet.Item3 != 0)
+                entries.Add((uint)itemSet.Item3);
+            
+            if (itemSet.Item5 != 0)
+                entries.Add((uint)itemSet.Item4);
+            
+            if (itemSet.Item5 != 0)
+                entries.Add((uint)itemSet.Item5);
+
+            if (itemSet.Item6 != 0)
+                entries.Add((uint)itemSet.Item6);
+            
+            if (itemSet.Item7 != 0)
+                entries.Add((uint)itemSet.Item7);
+            
+            if (itemSet.Item8 != 0)
+                entries.Add((uint)itemSet.Item8);
+            
+            if (itemSet.Item9 != 0)
+                entries.Add((uint)itemSet.Item9);
+            
+            if (itemSet.Item10 != 0)
+                entries.Add((uint)itemSet.Item10);
+
+            return entries;
         }
 
         public static object CreateResponeObject(this CItemSet itemSet)

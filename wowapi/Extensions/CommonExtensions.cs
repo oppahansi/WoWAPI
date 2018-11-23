@@ -78,7 +78,8 @@ namespace wowapi.Extensions
             itemFilterParams.DisenchantId == 0 &&
             itemFilterParams.FoodType == 0 &&
             itemFilterParams.MoneyLoot == 0 &&
-            itemFilterParams.Duration == 0;
+            itemFilterParams.Duration == 0 &&
+            itemFilterParams.Entries.Count() == 0;
         }
 
         public static bool IsEmpty(this ItemSetFilterParams itemSetFilterParams)
@@ -664,6 +665,9 @@ namespace wowapi.Extensions
 
             if (filterParams.Duration != 0)
                 filters.Add(x => x.Duration == filterParams.Duration);
+            
+            if (filterParams.Entries.Count() != 0)
+                filters.Add(x => filterParams.Entries.Contains(x.Entry));
 
             return filters;
         }

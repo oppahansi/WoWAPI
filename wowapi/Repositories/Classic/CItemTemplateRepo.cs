@@ -13,6 +13,7 @@ namespace wowapi.Repositories.Classic
 {
     public class CItemTemplateRepo : RepositoryBase<CItemTemplate>, ICItemTemplateRepo
     {
+        
         public CItemTemplateRepo(CRepositoryContext repositoryContext, IAppCache cache)
             : base(repositoryContext, cache)
         {
@@ -28,6 +29,12 @@ namespace wowapi.Repositories.Classic
                 itemTemplates = await FindAllByConditionsAsync(filterParams.AsFilters(), filterParams.FilterType, filterParams.ToCacheString());
 
             return itemTemplates.OrderItemTemplates(filterParams.SortOrder);
+        }
+
+        public async Task<IEnumerable<CItemTemplate>> GetAllItemTemplatesAsync(IEnumerable<uint> entries)
+        {
+            var itemTemplates = await FindAllAsync();
+            return itemTemplates.Where(x => entries.Contains(x.Entry)).OrderItemTemplates("name");
         }
 
         public async Task<CItemTemplate> GetItemByEntryAsync(uint entry)

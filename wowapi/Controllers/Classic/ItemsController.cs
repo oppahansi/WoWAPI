@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using wowapi.Contracts;
 using wowapi.Contracts.Classic;
+using wowapi.Contracts.Dbc;
 using wowapi.Extensions;
 using wowapi.Models.Db.Classic;
+using wowapi.Models.Db.Dbc;
 using wowapi.Models.Search;
 
 namespace wowapi.Controllers.Classic
@@ -14,11 +17,13 @@ namespace wowapi.Controllers.Classic
     {
         private ILoggerManager _logger;
         private ICRepositoryWrapper _repository;
+        private IDbcRepositoryWrapper _dbcRepository;
 
-        public ItemsController(ILoggerManager logger, ICRepositoryWrapper repository)
+        public ItemsController(ILoggerManager logger, ICRepositoryWrapper repository, IDbcRepositoryWrapper dbcRepository)
         {
             _logger = logger;
             _repository = repository;
+            _dbcRepository = dbcRepository;
         }
 
         [HttpGet]
@@ -27,7 +32,7 @@ namespace wowapi.Controllers.Classic
             try
             {
                 var itemList = await _repository.ItemTemplateRepo.GetAllItemTemplatesAsync(filterParams);
-                var paginatedItemList = await PaginatedList<CItemTemplate>.Create(itemList, filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize);
+                var paginatedItemList = await PaginatedList<CItemTemplate>.CreateAsync(itemList, filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize);
                 
                 var returnObject = new
                 {
@@ -50,7 +55,7 @@ namespace wowapi.Controllers.Classic
         }
 
         [HttpGet("{entry}", Name = "GetItem")]
-        public async Task<IActionResult> GetNpcAsync(uint entry)
+        public async Task<IActionResult> GetItemAsync(uint entry)
         {
             try
             {
@@ -61,14 +66,29 @@ namespace wowapi.Controllers.Classic
                     _logger.LogError($"Item details with entry: {entry}, hasn't been found in db.");
                     return NotFound();
                 }
+                
+                // TODO  move to an aggregator service ?
+                CItemSet itemSet = new CItemSet();
+                PaginatedList<CItemTemplate> itemSetItemList = new PaginatedList<CItemTemplate>(new List<CItemTemplate>(), 0, 0, 0);
+                if (itemTemplate.Itemset != 0)
+                {
+                    itemSet = await _dbcRepository.ItemSetRepo.GetItemSetAsync(itemTemplate.Itemset);
 
+                    if (!itemSet.IsEmptyObject())
+                    {
+                        var filterParams = new ItemFilterParams();
+                        filterParams.Entries = itemSet.GetItemEntries();
+                        itemSetItemList = await PaginatedList<CItemTemplate>.CreateAsync(await _repository.ItemTemplateRepo.GetAllItemTemplatesAsync(filterParams), 1, 10);
+                    }
+                }
+                
                 _logger.LogInfo($"Returned item details with entry: {entry}");
                 
-                return Ok(itemTemplate.CreateResponeObject());
+                return Ok(itemTemplate.CreateResponeObject(itemSetItemList.Count > 0 ? itemSetItemList.CreateResultObject(itemTemplate.Class) : null));
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Some error in the GetNpc method: {ex}");
+                _logger.LogError($"Some error in the GetItem method: {ex}");
                 return StatusCode(500, "Internal server error");
             }
         }

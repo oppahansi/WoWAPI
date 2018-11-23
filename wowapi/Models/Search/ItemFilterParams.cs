@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace wowapi.Models.Search
 {
     public class ItemFilterParams : FilterParams
@@ -52,5 +55,19 @@ namespace wowapi.Models.Search
         public byte FoodType { get; set; } = 0;
         public uint MoneyLoot { get; set; } = 0;
         public uint Duration { get; set; } = 0;
+        public IEnumerable<uint> Entries { get; set; } = new List<uint>();
+
+        public override string ToCacheString()
+        {
+            var ToCacheString = base.ToCacheString();
+
+            if (Entries.Count() > 0)
+            {
+                foreach (var entry in Entries)
+                    ToCacheString += entry;
+            }
+
+            return ToCacheString;
+        }
     }
 }

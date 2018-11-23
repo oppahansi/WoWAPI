@@ -1,5 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using wowapi.Enumerations;
 using wowapi.Models.Db.Classic;
+using wowapi.Models.Search;
 
 namespace wowapi.Extensions
 {
@@ -15,7 +18,7 @@ namespace wowapi.Extensions
             return itemTemplate.Entry == 0;
         }
 
-        public static object CreateResponeObject(this CItemTemplate itemTemplate)
+        public static object CreateResponeObject(this CItemTemplate itemTemplate, object itemSetItems = null)
         {
             switch (itemTemplate.Class)
             {
@@ -204,7 +207,7 @@ namespace wowapi.Extensions
                         SpellCategoryCooldown5 = itemTemplate.Spellcategorycooldown5,
                         Description = itemTemplate.Description,
                         DisenchantId = itemTemplate.DisenchantId,
-                        //ItemSet = ,
+                        ItemSetItems = itemSetItems == null ? new object() : itemSetItems
                         //ItemIcon = ,
                         //SoldBy = ,
                         //DroppedBy = ,
@@ -295,7 +298,7 @@ namespace wowapi.Extensions
                         SpellCategoryCooldown5 = itemTemplate.Spellcategorycooldown5,
                         Description = itemTemplate.Description,
                         DisenchantId = itemTemplate.DisenchantId,
-                        //ItemSet = ,
+                        ItemSetItems = itemSetItems == null ? new object() : itemSetItems
                         //ItemIcon = ,
                         //SoldBy = ,
                         //DroppedBy = ,

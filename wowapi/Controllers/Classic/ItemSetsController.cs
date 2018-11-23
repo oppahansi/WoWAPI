@@ -32,7 +32,7 @@ namespace wowapi.Controllers.Classic
             try
             {
                 var itemSetList = await _repository.ItemSetRepo.GetItemSetsAsync(filterParams);
-                var paginatedList = await PaginatedList<CItemSet>.Create(itemSetList, filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize);
+                var paginatedList = await PaginatedList<CItemSet>.CreateAsync(itemSetList, filterParams.Page, filterParams.PageSize > 100 ? 100 : filterParams.PageSize);
                 
                 var responseObject = new
                 {
