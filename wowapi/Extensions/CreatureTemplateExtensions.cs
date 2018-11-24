@@ -1,4 +1,6 @@
-﻿using wowapi.Enumerations;
+﻿using System.Collections.Generic;
+using System.Linq;
+using wowapi.Enumerations;
 using wowapi.Models.Db.Classic;
 
 namespace wowapi.Extensions
@@ -18,6 +20,20 @@ namespace wowapi.Extensions
         public static bool IsVendor(this CCreatureTemplate creatureTemplate)
         {
             return (creatureTemplate.NpcFlags & (uint)CreatureEnums.NpcFlags.UNIT_NPC_FLAG_VENDOR) == (uint)CreatureEnums.NpcFlags.UNIT_NPC_FLAG_VENDOR;
+        }
+
+        public static object CreateResultObject(this IEnumerable<CCreatureTemplate> creatureTemplates)
+        {
+            return creatureTemplates.Select(x => new
+                    {
+                        Id = x.Entry,
+                        Name = x.Name,
+                        SubName = x.SubName,
+                        MinLevel = x.MinLevel,
+                        MaxLevel = x.MaxLevel,
+                        CreatureType = x.CreatureType,
+                        Rank = x.Rank
+                    });
         }
 
         public static object CreateResponeObject(this CCreatureTemplate creatureTemplate)

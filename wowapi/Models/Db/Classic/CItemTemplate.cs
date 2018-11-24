@@ -57,6 +57,8 @@ namespace wowapi.Models.Db.Classic
         public CItemSet ItemSetObj { get; set; }
         [NotMapped]
         public string Icon { get; set; }
+        [NotMapped]
+        public IEnumerable<CCreatureTemplate> DroppedBy { get; set; }
         
     }
 }

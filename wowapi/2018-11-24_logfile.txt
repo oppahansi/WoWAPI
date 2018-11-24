@@ -1,0 +1,11 @@
+2018-11-24 04:20:51.7407 INFO Returned item details with entry: 2070
+2018-11-24 04:21:00.8953 INFO Returned item details with entry: 2070
+2018-11-24 04:24:44.9029 INFO Returned item details with entry: 2070
+2018-11-24 04:24:46.5695 INFO Returned item details with entry: 2070
+2018-11-24 04:29:14.3689 INFO Returned item details with entry: 16800
+2018-11-24 04:29:14.4275 ERROR Some error in the GetItem method: System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.Select[TSource,TResult](IEnumerable`1 source, Func`2 selector)
+   at wowapi.Extensions.CreatureTemplateExtensions.CreateResultObject(IEnumerable`1 creatureTemplates) in /Users/oppahansi/Dev/workspace/clang/wowapi/wowapi/Extensions/CreatureTemplateExtensions.cs:line 27
+   at wowapi.Extensions.ItemTemplateExtensions.CreateResponeObject(CItemTemplate itemTemplate) in /Users/oppahansi/Dev/workspace/clang/wowapi/wowapi/Extensions/ItemTemplateExtensions.cs:line 220
+   at wowapi.Controllers.Classic.ItemsController.GetItemAsync(UInt32 entry) in /Users/oppahansi/Dev/workspace/clang/wowapi/wowapi/Controllers/Classic/ItemsController.cs:line 77

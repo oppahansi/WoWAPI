@@ -8,6 +8,7 @@ namespace wowapi.Models.Db.Classic
     {
         public float ChanceOrQuestChance { get; set; }
         public int MincountOrRef { get; set; }
+        [Column("condition_id")]
         public uint ConditionId { get; set; }
         public string Comments { get; set; }
     }
