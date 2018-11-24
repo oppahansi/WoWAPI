@@ -18,7 +18,7 @@ namespace wowapi.Extensions
             return itemTemplate.Entry == 0;
         }
 
-        public static object CreateResponeObject(this CItemTemplate itemTemplate, object itemSetItems = null)
+        public static object CreateResponeObject(this CItemTemplate itemTemplate)
         {
             switch (itemTemplate.Class)
             {
@@ -83,7 +83,7 @@ namespace wowapi.Extensions
                         SpellCategory5 = itemTemplate.Spellcategory5,
                         SpellCooldown5 = itemTemplate.Spellcooldown5,
                         SpellCategoryCooldown5 = itemTemplate.Spellcategorycooldown5,
-                        //ItemIcon = ,
+                        ItemIcon = itemTemplate.Icon
                         //SoldBy = ,
                         //DroppedBy = ,
                         //ContainedIn =,
@@ -112,7 +112,7 @@ namespace wowapi.Extensions
                         AllowableRace = itemTemplate.AllowableRace,
                         Description = itemTemplate.Description,
                         Material = itemTemplate.Material,
-                        //ItemIcon = ,
+                        ItemIcon = itemTemplate.Icon
                         //SoldBy = ,
                         //DroppedBy = ,
                         //ContainedIn =,
@@ -207,8 +207,8 @@ namespace wowapi.Extensions
                         SpellCategoryCooldown5 = itemTemplate.Spellcategorycooldown5,
                         Description = itemTemplate.Description,
                         DisenchantId = itemTemplate.DisenchantId,
-                        ItemSetItems = itemSetItems == null ? new object() : itemSetItems
-                        //ItemIcon = ,
+                        ItemSetObj = itemTemplate.ItemSetObj != null ? itemTemplate.ItemSetObj.CreateResponeObject() : new object(),
+                        ItemIcon = itemTemplate.Icon
                         //SoldBy = ,
                         //DroppedBy = ,
                         //Disenchanting = ,
@@ -298,8 +298,8 @@ namespace wowapi.Extensions
                         SpellCategoryCooldown5 = itemTemplate.Spellcategorycooldown5,
                         Description = itemTemplate.Description,
                         DisenchantId = itemTemplate.DisenchantId,
-                        ItemSetItems = itemSetItems == null ? new object() : itemSetItems
-                        //ItemIcon = ,
+                        ItemSetObj = itemTemplate.ItemSetObj != null ? itemTemplate.ItemSetObj.CreateResponeObject() : new object(),
+                        ItemIcon = itemTemplate.Icon,
                         //SoldBy = ,
                         //DroppedBy = ,
                         //Disenchanting = ,
@@ -361,7 +361,7 @@ namespace wowapi.Extensions
                         SpellCategory5 = itemTemplate.Spellcategory5,
                         SpellCooldown5 = itemTemplate.Spellcooldown5,
                         SpellCategoryCooldown5 = itemTemplate.Spellcategorycooldown5,
-                        //ItemIcon = ,
+                        ItemIcon = itemTemplate.Icon
                         //SoldBy = ,
                         //DroppedBy = ,
                         //ContainedIn =,
@@ -393,7 +393,7 @@ namespace wowapi.Extensions
                         MinDmg1 = itemTemplate.DmgMin1,
                         MaxDmg1 = itemTemplate.DmgMax1,
                         Delay = itemTemplate.Delay,
-                        //ItemIcon = ,
+                        ItemIcon = itemTemplate.Icon
                         //SoldBy = ,
                         //DroppedBy = ,
                         //ContainedIn =,
@@ -461,7 +461,7 @@ namespace wowapi.Extensions
                         SpellCategory5 = itemTemplate.Spellcategory5,
                         SpellCooldown5 = itemTemplate.Spellcooldown5,
                         SpellCategoryCooldown5 = itemTemplate.Spellcategorycooldown5,
-                        //ItemIcon = ,
+                        ItemIcon = itemTemplate.Icon
                         //SoldBy = ,
                         //DroppedBy = ,
                         //ContainedIn =,
@@ -530,7 +530,7 @@ namespace wowapi.Extensions
                         SpellCategoryCooldown5 = itemTemplate.Spellcategorycooldown5,
                         PageMaterial = itemTemplate.PageMaterial,
                         PageText = itemTemplate.PageText,
-                        //ItemIcon = ,
+                        ItemIcon = itemTemplate.Icon
                         //SoldBy = ,
                         //DroppedBy = ,
                         //ContainedIn =,
@@ -592,7 +592,7 @@ namespace wowapi.Extensions
                         SpellCategory5 = itemTemplate.Spellcategory5,
                         SpellCooldown5 = itemTemplate.Spellcooldown5,
                         SpellCategoryCooldown5 = itemTemplate.Spellcategorycooldown5,
-                        //ItemIcon = ,
+                        ItemIcon = itemTemplate.Icon
                         //SoldBy = ,
                         //DroppedBy = ,
                         //ContainedIn =,
@@ -659,7 +659,7 @@ namespace wowapi.Extensions
                         SpellCategory5 = itemTemplate.Spellcategory5,
                         SpellCooldown5 = itemTemplate.Spellcooldown5,
                         SpellCategoryCooldown5 = itemTemplate.Spellcategorycooldown5,
-                        //ItemIcon = ,
+                        ItemIcon = itemTemplate.Icon
                         //SoldBy = ,
                         //DroppedBy = ,
                         //ContainedIn =,
@@ -667,7 +667,7 @@ namespace wowapi.Extensions
                         //CreatedBy = ,
                     };
                 default:
-                    return null;
+                    return new object();
             }
         }
     }

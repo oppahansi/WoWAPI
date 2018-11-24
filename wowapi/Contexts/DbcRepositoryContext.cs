@@ -13,5 +13,6 @@ namespace wowapi.Contexts
         DbSet<CItemSet> CItemSets { get; set; }
         DbSet<TItemSet> TItemSets { get; set; }
         DbSet<WItemSet> WItemSets { get; set; }
+        DbSet<CItemDisplayInfo> CItemDisplayInfos { get; set; }
     }
 }

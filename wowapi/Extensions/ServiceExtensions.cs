@@ -10,6 +10,7 @@ using wowapi.Contracts;
 using wowapi.Contracts.Classic;
 using wowapi.Contracts.Dbc;
 using wowapi.Repository.Classic;
+using wowapi.Services;
 
 namespace wowapi.Extensions
 {
@@ -35,7 +36,7 @@ namespace wowapi.Extensions
             });
         }
 
-        public static void ConfigureLoggerService(this IServiceCollection services)
+        public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
         }
@@ -53,6 +54,7 @@ namespace wowapi.Extensions
         {
             services.AddScoped<ICRepositoryWrapper, CRepositoryWrapper>();
             services.AddScoped<IDbcRepositoryWrapper, DbcRepositoryWrapper>();
+            services.AddScoped<IAggregatorService, AggregatorService>();
         }
 
         public static void ConfigureGzipCompression(this IServiceCollection services)

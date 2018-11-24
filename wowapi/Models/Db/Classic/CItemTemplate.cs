@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using wowapi.Models.Db.Common;
+using wowapi.Models.Db.Dbc;
 
 namespace wowapi.Models.Db.Classic
 {
@@ -50,5 +52,11 @@ namespace wowapi.Models.Db.Classic
         public sbyte Spellcharges5 { get; set; }
         public uint RandomProperty { get; set; }
         public byte ExtraFlags { get; set; }
+
+        [NotMapped]
+        public CItemSet ItemSetObj { get; set; }
+        [NotMapped]
+        public string Icon { get; set; }
+        
     }
 }

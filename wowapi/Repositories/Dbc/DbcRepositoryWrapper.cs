@@ -26,6 +26,20 @@ namespace wowapi.Repository.Classic
             }
         }
 
+        private IItemDisplayInfoRepo _itemDisplayInfoRepo;
+        public IItemDisplayInfoRepo ItemDisplayInfoRepo
+        {
+            get
+            {
+                if (_itemDisplayInfoRepo == null)
+                {
+                    _itemDisplayInfoRepo = new ItemDisplayInfoRepo(_dbcRepoContext, _cache);
+                }
+
+                return _itemDisplayInfoRepo;
+            }
+        }
+
         public DbcRepositoryWrapper(DbcRepositoryContext dbcRepositoryContext, IAppCache cache)
         {
             _dbcRepoContext = dbcRepositoryContext;

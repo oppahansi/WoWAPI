@@ -26,7 +26,7 @@ namespace wowapi
 
             services.ConfigureIISIntegration();
 
-            services.ConfigureLoggerService();
+            services.ConfigureServices();
 
             services.ConfigureMySqlContext(Configuration);
 
