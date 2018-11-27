@@ -95,47 +95,47 @@ namespace wowapi.Extensions
             switch (sortOrder.ToLower())
             {
                 case "subname":
-                    return qry.OrderBy(x => x.SubName);
+                    return qry.OrderBy(x => x.SubName).ThenBy(x => x.Name);
                 case "minLevel":
-                    return qry.OrderBy(x => x.MinLevel);
+                    return qry.OrderBy(x => x.MinLevel).ThenBy(x => x.Name);
                 case "maxlevel":
-                    return qry.OrderBy(x => x.MaxLevel);
+                    return qry.OrderBy(x => x.MaxLevel).ThenBy(x => x.Name);
                 case "family":
-                    return qry.OrderBy(x => x.SubName);
+                    return qry.OrderBy(x => x.SubName).ThenBy(x => x.Name);
                 case "type":
-                    return qry.OrderBy(x => x.CreatureType);
+                    return qry.OrderBy(x => x.CreatureType).ThenBy(x => x.Name);
                 case "npcflags":
-                    return qry.OrderBy(x => x.NpcFlags);
+                    return qry.OrderBy(x => x.NpcFlags).ThenBy(x => x.Name);
                 case "extraflags":
-                    return qry.OrderBy(x => x.ExtraFlags);
+                    return qry.OrderBy(x => x.ExtraFlags).ThenBy(x => x.Name);
                 case "mechanicimmune":
-                    return qry.OrderBy(x => x.MechanicImmuneMask);
+                    return qry.OrderBy(x => x.MechanicImmuneMask).ThenBy(x => x.Name);
                 case "schoolimmune":
-                    return qry.OrderBy(x => x.SchoolImmuneMask);
+                    return qry.OrderBy(x => x.SchoolImmuneMask).ThenBy(x => x.Name);
                 case "civilian":
-                    return qry.OrderBy(x => x.Civilian);
+                    return qry.OrderBy(x => x.Civilian).ThenBy(x => x.Name);
                 case "name_desc":
                     return qry.OrderByDescending(x => x.Name);
                 case "subname_desc":
-                    return qry.OrderByDescending(x => x.SubName);
+                    return qry.OrderByDescending(x => x.SubName).ThenByDescending(x => x.Name);
                 case "minLevel_desc":
-                    return qry.OrderByDescending(x => x.MinLevel);
+                    return qry.OrderByDescending(x => x.MinLevel).ThenByDescending(x => x.Name);
                 case "maxlevel_desc":
-                    return qry.OrderByDescending(x => x.MaxLevel);
+                    return qry.OrderByDescending(x => x.MaxLevel).ThenByDescending(x => x.Name);
                 case "family_desc":
-                    return qry.OrderByDescending(x => x.SubName);
+                    return qry.OrderByDescending(x => x.SubName).ThenByDescending(x => x.Name);
                 case "type_desc":
-                    return qry.OrderByDescending(x => x.CreatureType);
+                    return qry.OrderByDescending(x => x.CreatureType).ThenByDescending(x => x.Name);
                 case "npcflags_desc":
-                    return qry.OrderByDescending(x => x.NpcFlags);
+                    return qry.OrderByDescending(x => x.NpcFlags).ThenByDescending(x => x.Name);
                 case "extraflags_desc":
-                    return qry.OrderByDescending(x => x.ExtraFlags);
+                    return qry.OrderByDescending(x => x.ExtraFlags).ThenByDescending(x => x.Name);
                 case "mechanicimmune_desc":
-                    return qry.OrderByDescending(x => x.MechanicImmuneMask);
+                    return qry.OrderByDescending(x => x.MechanicImmuneMask).ThenByDescending(x => x.Name);
                 case "schoolimmune_desc":
-                    return qry.OrderByDescending(x => x.SchoolImmuneMask);
+                    return qry.OrderByDescending(x => x.SchoolImmuneMask).ThenByDescending(x => x.Name);
                 case "civilian_desc":
-                    return qry.OrderByDescending(x => x.Civilian);
+                    return qry.OrderByDescending(x => x.Civilian).ThenByDescending(x => x.Name);
                 default:
                     return qry.OrderBy(x => x.Name);
             }
@@ -146,195 +146,195 @@ namespace wowapi.Extensions
             switch (sortOrder.ToLower())
             {
                 case "class":
-                    return qry.OrderBy(x => x.Class);
+                    return qry.OrderBy(x => x.Class).ThenBy(x => x.Name);
                 case "subclass":
-                    return qry.OrderBy(x => x.Subclass);
+                    return qry.OrderBy(x => x.Subclass).ThenBy(x => x.Name);
                 case "quality":
-                    return qry.OrderBy(x => x.Quality);
+                    return qry.OrderBy(x => x.Quality).ThenBy(x => x.Name);
                 case "flags":
-                    return qry.OrderBy(x => x.Flags);
+                    return qry.OrderBy(x => x.Flags).ThenBy(x => x.Name);
                 case "inventorytype":
-                    return qry.OrderBy(x => x.InventoryType);
+                    return qry.OrderBy(x => x.InventoryType).ThenBy(x => x.Name);
                 case "allowableclass":
-                    return qry.OrderBy(x => x.AllowableClass);
+                    return qry.OrderBy(x => x.AllowableClass).ThenBy(x => x.Name);
                 case "allowablerace":
-                    return qry.OrderBy(x => x.AllowableRace);
+                    return qry.OrderBy(x => x.AllowableRace).ThenBy(x => x.Name);
                 case "reqlevel":
-                    return qry.OrderBy(x => x.RequiredLevel);
+                    return qry.OrderBy(x => x.RequiredLevel).ThenBy(x => x.Name);
                 case "reqskill":
-                    return qry.OrderBy(x => x.RequiredSkill);
+                    return qry.OrderBy(x => x.RequiredSkill).ThenBy(x => x.Name);
                 case "reqskillrank":
-                    return qry.OrderBy(x => x.RequiredSkillRank);
+                    return qry.OrderBy(x => x.RequiredSkillRank).ThenBy(x => x.Name);
                 case "reqspell":
-                    return qry.OrderBy(x => x.Requiredspell);
+                    return qry.OrderBy(x => x.Requiredspell).ThenBy(x => x.Name);
                 case "reqhonorrank":
-                    return qry.OrderBy(x => x.Requiredhonorrank);
+                    return qry.OrderBy(x => x.Requiredhonorrank).ThenBy(x => x.Name);
                 case "reqcityrank":
-                    return qry.OrderBy(x => x.RequiredCityRank);
+                    return qry.OrderBy(x => x.RequiredCityRank).ThenBy(x => x.Name);
                 case "reqrepfaction":
-                    return qry.OrderBy(x => x.RequiredReputationFaction);
+                    return qry.OrderBy(x => x.RequiredReputationFaction).ThenBy(x => x.Name);
                 case "reqreprank":
-                    return qry.OrderBy(x => x.RequiredReputationRank);
+                    return qry.OrderBy(x => x.RequiredReputationRank).ThenBy(x => x.Name);
                 case "containerslots":
-                    return qry.OrderBy(x => x.ContainerSlots);
+                    return qry.OrderBy(x => x.ContainerSlots).ThenBy(x => x.Name);
                 case "dmgmin1":
-                    return qry.OrderBy(x => x.DmgMin1);
+                    return qry.OrderBy(x => x.DmgMin1).ThenBy(x => x.Name);
                 case "dmgmax1":
-                    return qry.OrderBy(x => x.DmgMax1);
+                    return qry.OrderBy(x => x.DmgMax1).ThenBy(x => x.Name);
                 case "dmgtype1":
-                    return qry.OrderBy(x => x.DmgType1);
+                    return qry.OrderBy(x => x.DmgType1).ThenBy(x => x.Name);
                 case "dmgmin2":
-                    return qry.OrderBy(x => x.DmgMin2);
+                    return qry.OrderBy(x => x.DmgMin2).ThenBy(x => x.Name);
                 case "dmgmax2":
-                    return qry.OrderBy(x => x.DmgMax2);
+                    return qry.OrderBy(x => x.DmgMax2).ThenBy(x => x.Name);
                 case "dmgtype2":
-                    return qry.OrderBy(x => x.DmgType2);
+                    return qry.OrderBy(x => x.DmgType2).ThenBy(x => x.Name);
                 case "holyres":
-                    return qry.OrderBy(x => x.HolyRes);
+                    return qry.OrderBy(x => x.HolyRes).ThenBy(x => x.Name);
                 case "fireres":
-                    return qry.OrderBy(x => x.FireRes);
+                    return qry.OrderBy(x => x.FireRes).ThenBy(x => x.Name);
                 case "natureres":
-                    return qry.OrderBy(x => x.NatureRes);
+                    return qry.OrderBy(x => x.NatureRes).ThenBy(x => x.Name);
                 case "frostres":
-                    return qry.OrderBy(x => x.FrostRes);
+                    return qry.OrderBy(x => x.FrostRes).ThenBy(x => x.Name);
                 case "shadowres":
-                    return qry.OrderBy(x => x.ShadowRes);
+                    return qry.OrderBy(x => x.ShadowRes).ThenBy(x => x.Name);
                 case "arcaneres":
-                    return qry.OrderBy(x => x.ArcaneRes);
+                    return qry.OrderBy(x => x.ArcaneRes).ThenBy(x => x.Name);
                 case "speed":
-                    return qry.OrderBy(x => x.Delay);
+                    return qry.OrderBy(x => x.Delay).ThenBy(x => x.Name);
                 case "ammotype":
-                    return qry.OrderBy(x => x.AmmoType);
+                    return qry.OrderBy(x => x.AmmoType).ThenBy(x => x.Name);
                 case "spelltrigger":
-                    return qry.OrderBy(x => x.Spelltrigger1);
+                    return qry.OrderBy(x => x.Spelltrigger1).ThenBy(x => x.Name);
                 case "bonding":
-                    return qry.OrderBy(x => x.Bonding);
+                    return qry.OrderBy(x => x.Bonding).ThenBy(x => x.Name);
                 case "description":
-                    return qry.OrderBy(x => x.Description);
+                    return qry.OrderBy(x => x.Description).ThenBy(x => x.Name);
                 case "startq":
-                    return qry.OrderBy(x => x.Startquest);
+                    return qry.OrderBy(x => x.Startquest).ThenBy(x => x.Name);
                 case "lockid":
-                    return qry.OrderBy(x => x.Lockid);
+                    return qry.OrderBy(x => x.Lockid).ThenBy(x => x.Name);
                 case "material":
-                    return qry.OrderBy(x => x.Material);
+                    return qry.OrderBy(x => x.Material).ThenBy(x => x.Name);
                 case "sheath":
-                    return qry.OrderBy(x => x.Sheath);
+                    return qry.OrderBy(x => x.Sheath).ThenBy(x => x.Name);
                 case "block":
-                    return qry.OrderBy(x => x.Block);
+                    return qry.OrderBy(x => x.Block).ThenBy(x => x.Name);
                 case "itemset":
-                    return qry.OrderBy(x => x.Itemset);
+                    return qry.OrderBy(x => x.Itemset).ThenBy(x => x.Name);
                 case "durability":
-                    return qry.OrderBy(x => x.MaxDurability);
+                    return qry.OrderBy(x => x.MaxDurability).ThenBy(x => x.Name);
                 case "area":
-                    return qry.OrderBy(x => x.Area);
+                    return qry.OrderBy(x => x.Area).ThenBy(x => x.Name);
                 case "map":
-                    return qry.OrderBy(x => x.Map);
+                    return qry.OrderBy(x => x.Map).ThenBy(x => x.Name);
                 case "bagfamily":
-                    return qry.OrderBy(x => x.BagFamily);
+                    return qry.OrderBy(x => x.BagFamily).ThenBy(x => x.Name);
                 case "disid":
-                    return qry.OrderBy(x => x.DisenchantId);
+                    return qry.OrderBy(x => x.DisenchantId).ThenBy(x => x.Name);
                 case "foodtype":
-                    return qry.OrderBy(x => x.FoodType);
+                    return qry.OrderBy(x => x.FoodType).ThenBy(x => x.Name);
                 case "moneyloot":
-                    return qry.OrderBy(x => x.MaxMoneyLoot);
+                    return qry.OrderBy(x => x.MaxMoneyLoot).ThenBy(x => x.Name);
                 case "duration":
-                    return qry.OrderBy(x => x.Duration);
+                    return qry.OrderBy(x => x.Duration).ThenBy(x => x.Name);
                 case "name_desc":
                     return qry.OrderByDescending(x => x.Name);
                 case "class_desc":
-                    return qry.OrderByDescending(x => x.Class);
+                    return qry.OrderByDescending(x => x.Class).ThenByDescending(x => x.Name);
                 case "subclass_desc":
-                    return qry.OrderByDescending(x => x.Subclass);
+                    return qry.OrderByDescending(x => x.Subclass).ThenByDescending(x => x.Name);
                 case "quality_desc":
-                    return qry.OrderByDescending(x => x.Quality);
+                    return qry.OrderByDescending(x => x.Quality).ThenByDescending(x => x.Name);
                 case "flags_desc":
-                    return qry.OrderByDescending(x => x.Flags);
+                    return qry.OrderByDescending(x => x.Flags).ThenByDescending(x => x.Name);
                 case "inventorytype_desc":
-                    return qry.OrderByDescending(x => x.InventoryType);
+                    return qry.OrderByDescending(x => x.InventoryType).ThenByDescending(x => x.Name);
                 case "allowableclass_desc":
-                    return qry.OrderByDescending(x => x.AllowableClass);
+                    return qry.OrderByDescending(x => x.AllowableClass).ThenByDescending(x => x.Name);
                 case "allowablerace_desc":
-                    return qry.OrderByDescending(x => x.AllowableRace);
+                    return qry.OrderByDescending(x => x.AllowableRace).ThenByDescending(x => x.Name);
                 case "reqlevel_desc":
-                    return qry.OrderByDescending(x => x.RequiredLevel);
+                    return qry.OrderByDescending(x => x.RequiredLevel).ThenByDescending(x => x.Name);
                 case "reqskill_desc":
-                    return qry.OrderByDescending(x => x.RequiredSkill);
+                    return qry.OrderByDescending(x => x.RequiredSkill).ThenByDescending(x => x.Name);
                 case "reqskillrank_desc":
-                    return qry.OrderByDescending(x => x.RequiredSkillRank);
+                    return qry.OrderByDescending(x => x.RequiredSkillRank).ThenByDescending(x => x.Name);
                 case "reqspell_desc":
-                    return qry.OrderByDescending(x => x.Requiredspell);
+                    return qry.OrderByDescending(x => x.Requiredspell).ThenByDescending(x => x.Name);
                 case "reqhonorrank_desc":
-                    return qry.OrderByDescending(x => x.Requiredhonorrank);
+                    return qry.OrderByDescending(x => x.Requiredhonorrank).ThenByDescending(x => x.Name);
                 case "reqcityrank_desc":
-                    return qry.OrderByDescending(x => x.RequiredCityRank);
+                    return qry.OrderByDescending(x => x.RequiredCityRank).ThenByDescending(x => x.Name);
                 case "reqrepfaction_desc":
-                    return qry.OrderByDescending(x => x.RequiredReputationFaction);
+                    return qry.OrderByDescending(x => x.RequiredReputationFaction).ThenByDescending(x => x.Name);
                 case "reqreprank_desc":
-                    return qry.OrderByDescending(x => x.RequiredReputationRank);
+                    return qry.OrderByDescending(x => x.RequiredReputationRank).ThenByDescending(x => x.Name);
                 case "containerslots_desc":
-                    return qry.OrderByDescending(x => x.ContainerSlots);
+                    return qry.OrderByDescending(x => x.ContainerSlots).ThenByDescending(x => x.Name);
                 case "dmgmin1_desc":
-                    return qry.OrderByDescending(x => x.DmgMin1);
+                    return qry.OrderByDescending(x => x.DmgMin1).ThenByDescending(x => x.Name);
                 case "dmgmax1_desc":
-                    return qry.OrderByDescending(x => x.DmgMax1);
+                    return qry.OrderByDescending(x => x.DmgMax1).ThenByDescending(x => x.Name);
                 case "dmgtype1_desc":
-                    return qry.OrderByDescending(x => x.DmgType1);
+                    return qry.OrderByDescending(x => x.DmgType1).ThenByDescending(x => x.Name);
                 case "dmgmin2_desc":
-                    return qry.OrderByDescending(x => x.DmgMin2);
+                    return qry.OrderByDescending(x => x.DmgMin2).ThenByDescending(x => x.Name);
                 case "dmgmax2_desc":
-                    return qry.OrderByDescending(x => x.DmgMax2);
+                    return qry.OrderByDescending(x => x.DmgMax2).ThenByDescending(x => x.Name);
                 case "dmgtype2_desc":
-                    return qry.OrderByDescending(x => x.DmgType2);
+                    return qry.OrderByDescending(x => x.DmgType2).ThenByDescending(x => x.Name);
                 case "holyres_desc":
-                    return qry.OrderByDescending(x => x.HolyRes);
+                    return qry.OrderByDescending(x => x.HolyRes).ThenByDescending(x => x.Name);
                 case "fireres_desc":
-                    return qry.OrderByDescending(x => x.FireRes);
+                    return qry.OrderByDescending(x => x.FireRes).ThenByDescending(x => x.Name);
                 case "natureres_desc":
-                    return qry.OrderByDescending(x => x.NatureRes);
+                    return qry.OrderByDescending(x => x.NatureRes).ThenByDescending(x => x.Name);
                 case "frostres_desc":
-                    return qry.OrderByDescending(x => x.FrostRes);
+                    return qry.OrderByDescending(x => x.FrostRes).ThenByDescending(x => x.Name);
                 case "shadowres_desc":
-                    return qry.OrderByDescending(x => x.ShadowRes);
+                    return qry.OrderByDescending(x => x.ShadowRes).ThenByDescending(x => x.Name);
                 case "arcaneres_desc":
-                    return qry.OrderByDescending(x => x.ArcaneRes);
+                    return qry.OrderByDescending(x => x.ArcaneRes).ThenByDescending(x => x.Name);
                 case "speed_desc":
-                    return qry.OrderByDescending(x => x.Delay);
+                    return qry.OrderByDescending(x => x.Delay).ThenByDescending(x => x.Name);
                 case "ammotype_desc":
-                    return qry.OrderByDescending(x => x.AmmoType);
+                    return qry.OrderByDescending(x => x.AmmoType).ThenByDescending(x => x.Name);
                 case "spelltrigger_desc":
-                    return qry.OrderByDescending(x => x.Spelltrigger1);
+                    return qry.OrderByDescending(x => x.Spelltrigger1).ThenByDescending(x => x.Name);
                 case "bonding_desc":
-                    return qry.OrderByDescending(x => x.Bonding);
+                    return qry.OrderByDescending(x => x.Bonding).ThenByDescending(x => x.Name);
                 case "description_desc":
-                    return qry.OrderByDescending(x => x.Description);
+                    return qry.OrderByDescending(x => x.Description).ThenByDescending(x => x.Name);
                 case "startq_desc":
-                    return qry.OrderByDescending(x => x.Startquest);
+                    return qry.OrderByDescending(x => x.Startquest).ThenByDescending(x => x.Name);
                 case "lockid_desc":
-                    return qry.OrderByDescending(x => x.Lockid);
+                    return qry.OrderByDescending(x => x.Lockid).ThenByDescending(x => x.Name);
                 case "material_desc":
-                    return qry.OrderByDescending(x => x.Material);
+                    return qry.OrderByDescending(x => x.Material).ThenByDescending(x => x.Name);
                 case "sheath_desc":
-                    return qry.OrderByDescending(x => x.Sheath);
+                    return qry.OrderByDescending(x => x.Sheath).ThenByDescending(x => x.Name);
                 case "block_desc":
-                    return qry.OrderByDescending(x => x.Block);
+                    return qry.OrderByDescending(x => x.Block).ThenByDescending(x => x.Name);
                 case "itemset_desc":
-                    return qry.OrderByDescending(x => x.Itemset);
+                    return qry.OrderByDescending(x => x.Itemset).ThenByDescending(x => x.Name);
                 case "durability_desc":
-                    return qry.OrderByDescending(x => x.MaxDurability);
+                    return qry.OrderByDescending(x => x.MaxDurability).ThenByDescending(x => x.Name);
                 case "area_desc":
-                    return qry.OrderByDescending(x => x.Area);
+                    return qry.OrderByDescending(x => x.Area).ThenByDescending(x => x.Name);
                 case "map_desc":
-                    return qry.OrderByDescending(x => x.Map);
+                    return qry.OrderByDescending(x => x.Map).ThenByDescending(x => x.Name);
                 case "bagfamily_desc":
-                    return qry.OrderByDescending(x => x.BagFamily);
+                    return qry.OrderByDescending(x => x.BagFamily).ThenByDescending(x => x.Name);
                 case "disid_desc":
-                    return qry.OrderByDescending(x => x.DisenchantId);
+                    return qry.OrderByDescending(x => x.DisenchantId).ThenByDescending(x => x.Name);
                 case "foodtype_desc":
-                    return qry.OrderByDescending(x => x.FoodType);
+                    return qry.OrderByDescending(x => x.FoodType).ThenByDescending(x => x.Name);
                 case "moneyloot_desc":
-                    return qry.OrderByDescending(x => x.MaxMoneyLoot);
+                    return qry.OrderByDescending(x => x.MaxMoneyLoot).ThenByDescending(x => x.Name);
                 case "duration_desc":
-                    return qry.OrderByDescending(x => x.Duration);
+                    return qry.OrderByDescending(x => x.Duration).ThenByDescending(x => x.Name);
                 default:
                     return qry.OrderBy(x => x.Name);
             }
@@ -345,45 +345,45 @@ namespace wowapi.Extensions
             switch (sortOrder.ToLower())
             {
                 case "item1":
-                    return qry.OrderBy(x => x.Item1);
+                    return qry.OrderBy(x => x.Item1).ThenBy(x => x.Name);
                 case "item2":
-                    return qry.OrderBy(x => x.Item2);
+                    return qry.OrderBy(x => x.Item2).ThenBy(x => x.Name);
                 case "item3":
-                    return qry.OrderBy(x => x.Item3);
+                    return qry.OrderBy(x => x.Item3).ThenBy(x => x.Name);
                 case "item4":
-                    return qry.OrderBy(x => x.Item4);
+                    return qry.OrderBy(x => x.Item4).ThenBy(x => x.Name);
                 case "item5":
-                    return qry.OrderBy(x => x.Item5);
+                    return qry.OrderBy(x => x.Item5).ThenBy(x => x.Name);
                 case "item6":
-                    return qry.OrderBy(x => x.Item6);
+                    return qry.OrderBy(x => x.Item6).ThenBy(x => x.Name);
                 case "item7":
-                    return qry.OrderBy(x => x.Item7);
+                    return qry.OrderBy(x => x.Item7).ThenBy(x => x.Name);
                 case "item8":
-                    return qry.OrderBy(x => x.Item8);
+                    return qry.OrderBy(x => x.Item8).ThenBy(x => x.Name);
                 case "item9":
-                    return qry.OrderBy(x => x.Item9);
+                    return qry.OrderBy(x => x.Item9).ThenBy(x => x.Name);
                 case "item10":
-                    return qry.OrderBy(x => x.Item10);
+                    return qry.OrderBy(x => x.Item10).ThenBy(x => x.Name);
                 case "item1_desc":
-                    return qry.OrderByDescending(x => x.Item1);
+                    return qry.OrderByDescending(x => x.Item1).ThenByDescending(x => x.Name);
                 case "item2_desc":
-                    return qry.OrderByDescending(x => x.Item2);
+                    return qry.OrderByDescending(x => x.Item2).ThenByDescending(x => x.Name);
                 case "item3_desc":
-                    return qry.OrderByDescending(x => x.Item3);
+                    return qry.OrderByDescending(x => x.Item3).ThenByDescending(x => x.Name);
                 case "item4_desc":
-                    return qry.OrderByDescending(x => x.Item4);
+                    return qry.OrderByDescending(x => x.Item4).ThenByDescending(x => x.Name);
                 case "item5_desc":
-                    return qry.OrderByDescending(x => x.Item5);
+                    return qry.OrderByDescending(x => x.Item5).ThenByDescending(x => x.Name);
                 case "item6_desc":
-                    return qry.OrderByDescending(x => x.Item6);
+                    return qry.OrderByDescending(x => x.Item6).ThenByDescending(x => x.Name);
                 case "item7_desc":
-                    return qry.OrderByDescending(x => x.Item7);
+                    return qry.OrderByDescending(x => x.Item7).ThenByDescending(x => x.Name);
                 case "item8_desc":
-                    return qry.OrderByDescending(x => x.Item8);
+                    return qry.OrderByDescending(x => x.Item8).ThenByDescending(x => x.Name);
                 case "item9_desc":
-                    return qry.OrderByDescending(x => x.Item9);
+                    return qry.OrderByDescending(x => x.Item9).ThenByDescending(x => x.Name);
                 case "item10_desc":
-                    return qry.OrderByDescending(x => x.Item10);
+                    return qry.OrderByDescending(x => x.Item10).ThenByDescending(x => x.Name);
                 case "name_desc":
                     return qry.OrderByDescending(x => x.Name);
                 default:
