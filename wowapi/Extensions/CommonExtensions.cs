@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using wowapi.Models.Db.Classic;
 using wowapi.Models.Db.Common;
 using wowapi.Models.Db.Dbc;
@@ -704,6 +705,15 @@ namespace wowapi.Extensions
         {
             var speed = itemTemplate.Delay / 1000.0F;
             return (itemTemplate.DmgMin1 / speed + itemTemplate.DmgMax1 / speed) / 2;
+        }
+
+        public static string ToCacheString(this IEnumerable<uint> elements)
+        {
+            var stringBuilder = new StringBuilder();
+            foreach (var element in elements.OrderBy(x => x))
+                stringBuilder.Append(element);
+            
+            return stringBuilder.ToString();
         }
     }
 }

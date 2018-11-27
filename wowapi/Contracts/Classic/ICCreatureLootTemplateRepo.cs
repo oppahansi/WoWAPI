@@ -8,6 +8,7 @@ namespace wowapi.Contracts.Classic
     public interface ICCreatureLootTemplateRepo
     {
         Task<IEnumerable<CCreatureLootTemplate>> GetCreatureLootTemplatesByEntryAsync(uint entry);
+        Task<IEnumerable<CCreatureLootTemplate>> GetCreatureLootTemplatesByItemEntriesAsync(IEnumerable<uint> itemEntries);
         Task<IEnumerable<CCreatureLootTemplate>> GetCreatureLootTemplateByItemEntryAsync(uint itemEntry);
     }
 }

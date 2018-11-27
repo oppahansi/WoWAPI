@@ -34,7 +34,7 @@ namespace wowapi.Repository.Classic
 
         public async Task<IEnumerable<CCreatureTemplate>> GetAllCreatureTemplatesAsync(IEnumerable<uint> entries)
         {
-            return await FindByConditionAsync(x => entries.Contains(x.Entry), "creatureTemplates"+entries.ToHashSet().GetHashCode());
+            return await FindByConditionAsync(x => entries.Contains(x.Entry), "creatureTemplates"+entries.ToCacheString());
         }
 
         public async Task<CCreatureTemplate> GetCreatureTemplateByEntryAsync(uint entry)

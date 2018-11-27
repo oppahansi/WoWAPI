@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using wowapi.Models.Db.Common;
 using wowapi.Models.Db.Dbc;
+using wowapi.Models.Search;
 
 namespace wowapi.Models.Db.Classic
 {
@@ -58,7 +59,7 @@ namespace wowapi.Models.Db.Classic
         [NotMapped]
         public string Icon { get; set; }
         [NotMapped]
-        public IEnumerable<CCreatureTemplate> DroppedBy { get; set; }
+        public PaginatedList<CCreatureTemplate> DroppedBy { get; set; }
         
     }
 }

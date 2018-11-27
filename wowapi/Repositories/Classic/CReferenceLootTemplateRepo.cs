@@ -23,6 +23,11 @@ namespace wowapi.Repository.Classic
             return await FindByConditionAsync(x => x.Entry == entry, "referenceLootTemplateEntry" + entry);
         }
 
+        public async Task<IEnumerable<CReferenceLootTemplate>> GetReferenceLootTemplatesByItemEntryAsync(uint itemEntry)
+        {
+            return await FindByConditionAsync(x => x.Item == itemEntry, "itemEntryInReferenceLootTemplate" + itemEntry);
+        }
+
         public async Task<CReferenceLootTemplate> GetReferenceLootTemplateByItemEntryAsync(uint itemEntry)
         {
             var creatureLootTemplates = await FindByConditionAsync(x => x.Item == itemEntry, "referenceLootTemplateItemEntry" + itemEntry);

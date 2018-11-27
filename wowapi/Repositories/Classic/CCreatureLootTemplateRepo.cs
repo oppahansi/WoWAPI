@@ -27,5 +27,12 @@ namespace wowapi.Repository.Classic
         {
             return await FindByConditionAsync(x => x.Item == itemEntry, "creatureLootTemplateItemEntry" + itemEntry);;
         }
+
+        public async Task<IEnumerable<CCreatureLootTemplate>> GetCreatureLootTemplatesByItemEntriesAsync(IEnumerable<uint> itemEntries)
+        {
+            return await FindByConditionAsync(x => itemEntries.Contains(x.Item), "creatureLootTemplatesByItemEntries" + itemEntries.ToCacheString());;
+        }
+
+        
     }
 }
