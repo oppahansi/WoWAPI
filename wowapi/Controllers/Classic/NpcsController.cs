@@ -31,7 +31,7 @@ namespace wowapi.Controllers.Classic
                 
                 var responseObject = new
                 {
-                    category = "npcps",
+                    category = "npcs",
                     page = paginatedCreatureList.PageIndex,
                     totalPages = paginatedCreatureList.TotalPages,
                     pageSize = paginatedCreatureList.PageSize,
