@@ -33,6 +33,9 @@ https://localhost:5001/api/c/npcs/123
 https://localhost:5001/api/c/items/123  
 https://localhost:5001/api/c/itemsets/123  
   
+An example of single item with aggregation of dropped by, icon + itemset from dbc db:
+https://paste2.org/xcnYbs2W 
+  
   
 Results can be filtered using url parameters:  
 https://localhost:5001/api/c/npcs?parameter=value  
